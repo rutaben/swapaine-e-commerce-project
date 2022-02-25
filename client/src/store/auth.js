@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = { // ?kodel nebeesame priklausomi nuo sessionService?
+const initialState = {
   loggedIn: null,
   user: null,
   redirectTo: null,

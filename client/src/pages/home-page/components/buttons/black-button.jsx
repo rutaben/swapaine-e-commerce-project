@@ -20,6 +20,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
 const BlackButton = ({ title }) => (
   <StyledButton
     fullWidth
+    type="submit"
     variant="outlined"
     size="large"
     sx={{ px: 7 }}
