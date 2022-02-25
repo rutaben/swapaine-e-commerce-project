@@ -187,8 +187,11 @@ const ProfilePageUserInfo = ({ user }) => {
         </Grid>
 
       </Grid>
-      <Box sx={{ mt: 3, display: 'flex', justifyContent: 'center' }}>
-        <BlackButton title="Išsaugoti" type="submit" disabled={!dirty || !isValid} />
+      <Box sx={{
+        mt: 3, display: 'flex', justifyContent: 'center', width: '50%',
+      }}
+      >
+        <BlackButton variant="outlined" title="Išsaugoti" disabled={!dirty || !isValid} />
       </Box>
     </Box>
   );

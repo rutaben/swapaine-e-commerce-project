@@ -2,7 +2,10 @@ const express = require('express');
 const authMiddleware = require('../middlewares/auth-middleware');
 const adminMiddleWare = require('../middlewares/admin-middleware');
 const {
-  getUsers } = require('../controllers/user-controller');
+  getUsers,
+  updateUser,
+  updateUserMainImage,
+} = require('../controllers/user-controller');
 
 const router = express.Router();
 
@@ -12,5 +15,9 @@ const router = express.Router();
 router.use(authMiddleware);
 
 router.get('/', adminMiddleWare, getUsers);
+
+router.patch('/', updateUser);
+
+router.patch('/mainImg/:mainImg', updateUserMainImage);
 
 module.exports = router;

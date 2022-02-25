@@ -1,8 +1,9 @@
 const Mongoose = require('mongoose');
+const Schema = Mongoose.Schema;
 const uniqueValidator = require('mongoose-unique-validator');
 const { isEmail } = require('validator');
 
-const userSchema = new Mongoose.Schema({
+const userSchema = new Schema({
   email: {
     type: 'string',
     required: true,
@@ -31,6 +32,11 @@ const userSchema = new Mongoose.Schema({
     ]
   },
   //repeatPassword čia nekuriame, nes mes jo niekur nesiųsime, jį reikia patikrinti iš karto
+  mainImg: {
+    type: Schema.Types.ObjectId,
+    ref: 'Image',
+    unique: true,
+  },
   role: {
     type: 'string',
     enum: ['USER', 'ADMIN'],
