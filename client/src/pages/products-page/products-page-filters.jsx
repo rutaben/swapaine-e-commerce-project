@@ -4,11 +4,10 @@ import {
 } from '@mui/material';
 
 import { ProductContext } from './contexts/product-context';
-import CheckboxFilter from '../components/autocomplete';
+import CheckboxFilter from '../components/checkbox-filter';
 
 const ProductsPageFilters = () => {
   const { filters, handleFilterChange } = useContext(ProductContext);
-  // console.log(filters);
 
   return (
     <Box>
@@ -16,8 +15,7 @@ const ProductsPageFilters = () => {
         filterOptions={filters.category}
         filterName="category"
         label="Kategorija"
-        onChange={(e, selectedOptions, filterName) => handleFilterChange(
-          e,
+        onChange={(selectedOptions, filterName) => handleFilterChange(
           selectedOptions,
           filterName,
         )}
@@ -27,8 +25,7 @@ const ProductsPageFilters = () => {
         filterOptions={filters.color}
         filterName="color"
         label="Spalva"
-        onChange={(e, selectedOptions, filterName) => handleFilterChange(
-          e,
+        onChange={(selectedOptions, filterName) => handleFilterChange(
           selectedOptions,
           filterName,
         )}
@@ -38,8 +35,7 @@ const ProductsPageFilters = () => {
         filterOptions={filters.size}
         filterName="size"
         label="Dydžiai"
-        onChange={(e, selectedOptions, filterName) => handleFilterChange(
-          e,
+        onChange={(selectedOptions, filterName) => handleFilterChange(
           selectedOptions,
           filterName,
         )}
@@ -49,8 +45,7 @@ const ProductsPageFilters = () => {
         filterOptions={filters.brand}
         filterName="brand"
         label="Gamintojas"
-        onChange={(e, selectedOptions, filterName) => handleFilterChange(
-          e,
+        onChange={(selectedOptions, filterName) => handleFilterChange(
           selectedOptions,
           filterName,
         )}
