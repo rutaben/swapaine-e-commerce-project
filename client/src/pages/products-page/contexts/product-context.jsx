@@ -1,7 +1,8 @@
-/* eslint-disable */
-
 import React, {
-  useState, useEffect, createContext, useMemo,
+  useState,
+  useEffect,
+  createContext,
+  useMemo,
 } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { createUrlParamObj } from '../../../helpers/url-helpers';
@@ -21,16 +22,14 @@ const ProductProvider = ({ children }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [products, setProducts] = useState(initialProducts);
   const [filters, setFilters] = useState(initialFilters);
-  //console.log(filters)
-
-  //console.log(searchParams)
+  console.log(filters);
 
   useEffect(() => {
     (async () => {
       const params = createUrlParamObj(searchParams);
       const getProducts = await ApiService.getProducts(params);
-      const productsArr = Object.values(getProducts);
-      setProducts(productsArr[0]);
+      const productsArr = Object.values(getProducts).flat();
+      setProducts(productsArr);
     })();
   }, [filters]);
 
@@ -43,8 +42,6 @@ const ProductProvider = ({ children }) => {
     size,
   });
 
-
-  //1) parsisiunciau filtrus is serverio
   useEffect(() => {
     (async () => {
       const getFilters = await Promise.all([
@@ -54,46 +51,43 @@ const ProductProvider = ({ children }) => {
         ApiService.getSizes(),
       ]);
       try {
-        const initFiltersValues = getFilters.map(filter => Object.values(filter)).flat()
+        const initFiltersValues = getFilters.map((filter) => Object.values(filter)).flat();
         const filtersObj = filtersArrToObj(initFiltersValues);
 
-        const queryParams = createUrlParamObj(searchParams);
-        //console.log(queryParams);
+        const urlParams = createUrlParamObj(searchParams);
 
-        const koreikia = Object.entries(queryParams);
-        const options = [];
-        koreikia.forEach(([filterName, paramValue]) => {
-          const ids = [].concat(paramValue);
-          ids.forEach((id) => {
-            const foundOption = filtersObj[filterName].find((x) => x.id === id)
-            options.push(foundOption);
-          })
-        })
-        const onlyIds = options.map(({id}) => id);
+        const urlParamObjEntries = Object.entries(urlParams);
+        const filtersOptionsFromUrl = [];
+        urlParamObjEntries.forEach(([filterName, paramValue]) => {
+          const urlParamObjValueArr = [].concat(paramValue);
+          urlParamObjValueArr.forEach((id) => {
+            const foundOption = filtersObj[filterName].find((x) => x.id === id);
+            filtersOptionsFromUrl.push(foundOption);
+          });
+        });
+        const filtersOptionsIdsFromUrl = filtersOptionsFromUrl.map(({ id }) => id);
 
-          const aha = Object.entries(filtersObj)
-            .map(([key, value]) => ({
-              [key]: value.map((filter) => {
-              if(onlyIds.indexOf(filter.id) !== -1) {
+        const setSelectedOptionsFromUrl = Object.entries(filtersObj)
+          .map(([key, value]) => ({
+            [key]: value.map((filter) => {
+              if (filtersOptionsIdsFromUrl.indexOf(filter.id) !== -1) {
+                return ({
+                  ...filter,
+                  selected: true,
+                });
+              }
               return ({
-                ...filter, 
-                selected: true 
-              })
-            } else {
-              return ({
-                ...filter, 
-                selected: false 
-              })
-            }
-            })
-            }));
-  
-            const syncedFiltersValues = aha.map(filter => Object.values(filter)).flat()
-            const syncedFiltersObj = filtersArrToObj(syncedFiltersValues);
+                ...filter,
+                selected: false,
+              });
+            }),
+          }));
 
-        //console.log(syncedFiltersObj)
+        const syncedFiltersValues = setSelectedOptionsFromUrl
+          .map((filter) => Object.values(filter))
+          .flat();
+        const syncedFiltersObj = filtersArrToObj(syncedFiltersValues);
 
-  //3 nustaciau pradinius filtrus
         setFilters(syncedFiltersObj);
       } catch (err) {
         throw new Error(err);
@@ -101,54 +95,37 @@ const ProductProvider = ({ children }) => {
     })();
   }, []);
 
-  const updateQueryParamsWithNewFilters = (newFilters) => {
-    let values = [];
-    Object.entries(newFilters).forEach(([filterName, valueArr]) => 
-      values.push(valueArr.map((obj) => ({ ...obj, filterName})))
-    );
+  const updateUrlParamsWithNewFilters = (newFilters) => {
+    const newValuesArr = [];
+    Object.entries(newFilters).forEach(([filterName, valueArr]) => {
+      newValuesArr.push(valueArr.map((obj) => ({ ...obj, filterName })));
+    });
+    const transformedValues = newValuesArr
+      .flat()
+      .filter((obj) => obj.selected)
+      .map(({ id, filterName }) => ({
+        key: filterName,
+        value: id,
+      }));
 
-  // 8) pakeiciu filtrus taip, kad galeciau su jais sukurti nauja urlParam objekta
-    
-
-    const transformedVals = values.flat().filter((obj) => obj.selected).map(({id, filterName}) => ({
-      key: filterName,
-      value: id
-    }));
-
-    const newQueryParams = createUrlParamObj(searchParams, transformedVals);
-  // 9) nustatau url parametrus pagal naujus filtrus
-    setSearchParams(newQueryParams);
-    
+    const newUrlParams = createUrlParamObj(searchParams, transformedValues);
+    setSearchParams(newUrlParams);
   };
 
-  // 4) pasirinkus filtra vykdosi filtro pakeitimas
-  const handleFilterChange = (e, selectedOptions, filterName) => {
-    // 5) istrinu filtra is paramsu, jei jau buvo (ir nekursiu naujo)
-    searchParams.delete(filterName);
-    //console.log(e)
+  const handleFilterChange = (selectedOption, filterName) => {
+    const newFilter = [...filters[filterName]];
+    const foundSelectedOption = newFilter.find((x) => x.id === selectedOption.id);
+    if (foundSelectedOption) {
+      foundSelectedOption.selected = true;
+    }
 
-    console.log('--------------------------');
-    console.log('--------------------------');
-    console.log(filters[filterName]);
-    console.log({ selectedOptions , e});
-    console.log('--------------------------');
+    const newFilters = {
+      ...filters,
+      [filterName]: newFilter,
+    };
 
-  
-    const changeSelected = selectedOptions.map((option) => ({...option, selected: true}));
-    
-    //console.log(selectedOptions)
-    
-    
-    const updatedFilter = filters[filterName]
-    .map((obj) => changeSelected.find((o) => o.id === obj.id) || obj)
-
-    let newFilters;
-    newFilters = {...filters, [filterName]: updatedFilter};
-  
-  // 6) nustatau naujus filtrus
     setFilters(newFilters);
-  //7) pagal atnaujintis filtrus pakeiciu url parametrus
-    updateQueryParamsWithNewFilters(newFilters);
+    updateUrlParamsWithNewFilters(newFilters);
   };
 
   const providerValue = useMemo(() => ({
