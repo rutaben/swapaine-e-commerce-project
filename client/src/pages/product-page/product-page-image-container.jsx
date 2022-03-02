@@ -4,11 +4,9 @@ import {
   Avatar,
 } from '@mui/material';
 
-const images = ['https://www.net-a-porter.com/variants/images/24665545640540058/fr/w920_q60.jpg', 'https://www.net-a-porter.com/variants/images/24665545640540058/ou/w2000_q60.jpg', 'https://www.net-a-porter.com/variants/images/24665545640540058/in/w920_q60.jpg', 'https://www.net-a-porter.com/variants/images/24665545640540058/cu/w920_q60.jpg'];
-
-const ProductPageImages = () => (
+const ProductPageImages = ({ productImgs }) => (
   <Grid container spacing={2}>
-    {images.map((image) => (
+    {productImgs.map((image) => (
       <Grid
         item
         xs={12}

@@ -15,7 +15,7 @@ const CardLink = styled(Link)(({ theme }) => ({
 }));
 
 const ProductCard = ({
-  id, name, price, brand,
+  id, name, price, brand, productImage,
 }) => (
   <Card
     elevation={0}
@@ -28,7 +28,7 @@ const ProductCard = ({
         <CardMedia
           component="img"
           height="350"
-          image="http://unsplash.it/300/400"
+          image={productImage}
           alt="product"
         />
         <CardContent>

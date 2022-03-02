@@ -7,6 +7,7 @@ const cors = require('cors');
 const authRouter = require('./routes/auth-router');
 const userRouter = require('./routes/user-router.js');
 const imageRouter = require('./routes/image-router');
+const productImageRouter = require('./routes/product-image-router');
 
 const productRouter = require('./routes/product-router');
 const brandRouter = require('./routes/brand-router');
@@ -38,6 +39,7 @@ server.use(express.json());
 server.use('/api/auth', authRouter);
 server.use('/api/users', userRouter);
 server.use('/api/images', imageRouter);
+server.use('/api/product-images', productImageRouter);
 
 server.use('/api/products', productRouter);
 server.use('/api/brands', brandRouter);

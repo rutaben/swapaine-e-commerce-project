@@ -12,7 +12,7 @@ const ProductsPageGrid = () => {
   return (
     <Grid container>
       {products.map(({
-        id, price, name, brand,
+        id, price, name, brand, productImages,
       }) => (
         <Grid item xs={12} sm={6} md={4} lg={4} key={id}>
           <ProductCard
@@ -20,6 +20,7 @@ const ProductsPageGrid = () => {
             name={name}
             price={price}
             id={id}
+            productImage={productImages[0].src}
           />
         </Grid>
       ))}

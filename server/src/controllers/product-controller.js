@@ -2,7 +2,7 @@ const ProductModel = require('../models/product-model');
 const ProductViewModel = require('../view-models/product-view-model');
 
 const getProducts = async (req, res) => {
-  const { category, brand, size, color } = req.query;
+  const { category, brand, size, color, productImages } = req.query;
   const filterObject = {};
 
   if (category) {
@@ -24,12 +24,13 @@ const getProducts = async (req, res) => {
     .populate('brand')
     .populate('size')
     .populate('color')
+    .populate('productImages')
   const Products = ProductDocs.map(Product => new ProductViewModel(Product));
   res.status(200).json({ Products });
 };
 
 const createProduct = async (req, res) => {
-  const { name, price, category, size, color, brand } = req.body;
+  const { name, price, category, size, color, brand, productImages } = req.body;
   const ProductDoc = await ProductModel({
     name,
     price,
@@ -37,6 +38,7 @@ const createProduct = async (req, res) => {
     size,
     color,
     brand,
+    productImages,
   });
 
   try {
@@ -59,6 +61,7 @@ const getProduct = async (req, res) => {
       .populate('category')
       .populate('color')
       .populate('size')
+      .populate('productImages')
     const Product = new ProductViewModel(ProductDoc);
     res.status(200).json(Product);
   } catch (error) {

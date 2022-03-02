@@ -22,7 +22,6 @@ const ProductProvider = ({ children }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [products, setProducts] = useState(initialProducts);
   const [filters, setFilters] = useState(initialFilters);
-  console.log(filters);
 
   useEffect(() => {
     (async () => {

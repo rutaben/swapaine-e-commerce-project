@@ -28,6 +28,12 @@ const productSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Brand'
   },
+  productImages: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Product-Image',
+    }
+  ]
 }, {
   timestamps: true,
 });
