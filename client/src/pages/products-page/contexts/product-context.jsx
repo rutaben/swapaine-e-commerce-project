@@ -20,17 +20,12 @@ export const ProductContext = createContext();
 
 const ProductProvider = ({ children }) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [products, setProducts] = useState(initialProducts);
   const [filters, setFilters] = useState(initialFilters);
+  const [products, setProducts] = useState(initialProducts);
+  const [pagesCount, setPagesCount] = useState(1);
+  const [productGridPage, setProductGridPage] = useState(1);
 
-  useEffect(() => {
-    (async () => {
-      const params = createUrlParamObj(searchParams);
-      const getProducts = await ApiService.getProducts(params);
-      const productsArr = Object.values(getProducts).flat();
-      setProducts(productsArr);
-    })();
-  }, [filters]);
+  // filters
 
   const filtersArrToObj = ([
     brand, category, color, size,
@@ -53,8 +48,12 @@ const ProductProvider = ({ children }) => {
         const initFiltersValues = getFilters.map((filter) => Object.values(filter)).flat();
         const filtersObj = filtersArrToObj(initFiltersValues);
 
-        const urlParams = createUrlParamObj(searchParams);
+        // jeigu imu search paramsus su page savybe, susigadina filtrai;
+        if (searchParams.get('page')) {
+          searchParams.delete('page');
+        }
 
+        const urlParams = createUrlParamObj(searchParams);
         const urlParamObjEntries = Object.entries(urlParams);
         const filtersOptionsFromUrl = [];
         urlParamObjEntries.forEach(([filterName, paramValue]) => {
@@ -127,10 +126,60 @@ const ProductProvider = ({ children }) => {
     updateUrlParamsWithNewFilters(newFilters);
   };
 
+  // products
+
+  useEffect(() => {
+    (async () => {
+      const params = createUrlParamObj(searchParams);
+      const getProducts = await ApiService.getProducts(params);
+      const totalPagesCount = getProducts.totalPages;
+      const currPage = getProducts.currentPage;
+      const productsArr = Object.values(getProducts.data).flat();
+      setProducts(productsArr);
+      setPagesCount(totalPagesCount);
+      setProductGridPage(currPage);
+    })();
+  }, [filters, searchParams, pagesCount]);
+
+  const getInitialSearchParams = () => {
+    if (!searchParams.get('page')) {
+      searchParams.set('page', { productGridPage });
+      setSearchParams(searchParams);
+      return { page: { productGridPage } };
+    }
+    return {
+      page: parseInt(searchParams.get('page'), 10),
+    };
+  };
+
+  useEffect(() => {
+    const { page } = getInitialSearchParams();
+    setProductGridPage(page);
+  }, []);
+
+  const setNewSearchParams = (newSearchParams) => {
+    newSearchParams.forEach(({ prevKey, key, value }) => {
+      if (!prevKey) searchParams.delete(prevKey);
+      searchParams.set(key, value);
+    });
+    setSearchParams(searchParams);
+  };
+
+  const handleChange = (_, value) => {
+    window.scrollTo(0, 0);
+    setProductGridPage(value);
+    setNewSearchParams([
+      { key: 'page', value },
+    ]);
+  };
+
   const providerValue = useMemo(() => ({
-    products,
     filters,
     handleFilterChange,
+    products,
+    pagesCount,
+    productGridPage,
+    handleChange,
   }), [products, filters]);
 
   return (

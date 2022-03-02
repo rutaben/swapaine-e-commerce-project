@@ -1,13 +1,15 @@
-// import React from 'react';
 import React, { useContext } from 'react';
 import {
   Grid,
+  Pagination,
 } from '@mui/material';
 import ProductCard from '../../components/cards/product-card';
 import { ProductContext } from './contexts/product-context';
 
 const ProductsPageGrid = () => {
-  const { products } = useContext(ProductContext);
+  const {
+    products, pagesCount, productGridPage, handleChange,
+  } = useContext(ProductContext);
 
   return (
     <Grid container>
@@ -24,6 +26,9 @@ const ProductsPageGrid = () => {
           />
         </Grid>
       ))}
+      <Grid item xs={12}>
+        <Pagination shape="rounded" count={pagesCount} page={productGridPage} onChange={handleChange} />
+      </Grid>
     </Grid>
   );
 };
