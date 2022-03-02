@@ -49,14 +49,14 @@ const Instructions = () => (
     container
     sx={(theme) => ({
       px: 15,
-      my: 12,
+      my: 15,
       [theme.breakpoints.down('md')]: {
         my: 0,
         px: 20,
         backgroundImage: 'none',
       },
       [theme.breakpoints.down('sm')]: {
-        my: 0,
+        my: 5,
         px: 3,
       },
     })}
