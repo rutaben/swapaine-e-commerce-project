@@ -1,7 +1,5 @@
 const Mongoose = require('mongoose');
 const Schema = Mongoose.Schema;
-// const uniqueValidator = require('mongoose-unique-validator');
-//unikalių reikšmių validatorius
 
 const productSchema = new Schema({
   name: {
@@ -37,8 +35,6 @@ const productSchema = new Schema({
 }, {
   timestamps: true,
 });
-
-// productSchema.plugin(uniqueValidator);
 
 const ProductModel = Mongoose.model('Product', productSchema);
 

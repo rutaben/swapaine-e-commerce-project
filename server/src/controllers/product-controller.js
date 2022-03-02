@@ -2,7 +2,14 @@ const ProductModel = require('../models/product-model');
 const ProductViewModel = require('../view-models/product-view-model');
 
 const getProducts = async (req, res) => {
-  const { category, brand, size, color, productImages } = req.query;
+  const {
+    page = 1,
+    limit = 9,
+    category,
+    brand,
+    size,
+    color
+  } = req.query;
   const filterObject = {};
 
   if (category) {
@@ -25,8 +32,26 @@ const getProducts = async (req, res) => {
     .populate('size')
     .populate('color')
     .populate('productImages')
+    .limit(limit * 1)
+    .skip((page - 1) * limit)
+
   const Products = ProductDocs.map(Product => new ProductViewModel(Product));
-  res.status(200).json({ Products });
+
+  const allProducts = await ProductModel
+    .find(filterObject)
+    .populate('category')
+    .populate('brand')
+    .populate('size')
+    .populate('color')
+    .populate('productImages')
+  const allProductsCount = allProducts.map((product) => new ProductViewModel(product)).length;
+  console.log(allProductsCount);
+
+  res.status(200).json({
+    data: Products,
+    totalPages: Math.ceil(allProductsCount / limit),
+    currentPage: page,
+  });
 };
 
 const createProduct = async (req, res) => {
