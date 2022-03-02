@@ -1,15 +1,11 @@
-import React, { useEffect } from 'react';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import React from 'react';
 import {
   Container,
   Typography,
   Grid,
-  Box,
   styled,
 } from '@mui/material';
 import CollectionCard from './components/cards/collection-card';
-import SlideIconAnimation from './components/animations/slide-icon-animation';
 
 const StyledHeader = styled(Typography)(() => ({
   fontWeight: 700,
@@ -17,79 +13,49 @@ const StyledHeader = styled(Typography)(() => ({
   fontFamily: 'Lexend Deca',
 }));
 
-const StyledGrid = styled(Grid)(() => ({
-  display: 'flex',
-  overflowX: 'scroll',
-  alignItems: 'flex-end',
-  '&::-webkit-scrollbar': {
-    width: 0,
-  },
-}));
-
 const shopCardsData = [
-  { title: 'Vakaro žvaigždė', image: 'https://images.pexels.com/photos/3394225/pexels-photo-3394225.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260' },
-  { title: 'Diena biure', image: 'https://images.pexels.com/photos/8465072/pexels-photo-8465072.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260' },
-  { title: 'Savaitgalio malonumai', image: 'https://images.pexels.com/photos/6977372/pexels-photo-6977372.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260' },
-  { title: 'Atostogų režimas', image: 'https://images.pexels.com/photos/10661108/pexels-photo-10661108.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260' },
-  { title: 'Vestuvių viešnia', image: 'https://images.pexels.com/photos/9799802/pexels-photo-9799802.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260' },
+  { title: 'Švarkai', image: 'https://res.cloudinary.com/rutaben/image/upload/v1646157393/product-images/13-1_cne1as.png' },
+  { title: 'Kelnės', image: 'https://res.cloudinary.com/rutaben/image/upload/v1646157368/product-images/8-1_tj5mp1.png' },
+  { title: 'Suknelės', image: 'https://res.cloudinary.com/rutaben/image/upload/v1646157413/product-images/47-1_nk4li4.png' },
 ];
 
-const Shop = () => {
-  useEffect(() => {
-    AOS.init({ duration: 500 });
-  }, []);
-
-  return (
-    <Container maxWidth="xl">
-      <Grid
-        container
-        spacing={2}
-        sx={{
-          display: 'flex',
-          mt: 20,
-          mb: 15,
-          px: 3,
-        }}
-      >
-        <Grid item xs={12} sx={{ position: 'relative' }}>
-          <Box
-            sx={{
-              marginLeft: 18,
-              bottom: -150,
-              display: 'flex',
-              position: 'absolute',
-            }}
-          >
-            <SlideIconAnimation />
-          </Box>
-        </Grid>
-        <Grid item xs={12} md={2}>
-          <StyledHeader
-            variant="h4"
-            sx={() => ({
-              position: 'absolute',
-              mt: -9,
-            })}
-          >
-            Populiarios kolekcijos
-          </StyledHeader>
-        </Grid>
-        <StyledGrid
-          item
-          data-aos="fade-left"
-          xs={12}
-          md={10}
-          sx={{ gap: 2, position: 'relative' }}
-        >
-          {shopCardsData.map(({
-            title, image,
-          }) => (
-            <CollectionCard key={title} title={title} image={image} />
-          ))}
-        </StyledGrid>
+const Shop = () => (
+  <Container maxWidth="lg">
+    <Grid
+      container
+      sx={(theme) => ({
+        display: 'flex',
+        justifyContent: 'center',
+        my: 15,
+        [theme.breakpoints.down('md')]: {
+          my: 5,
+          px: 25,
+        },
+        [theme.breakpoints.down('sm')]: {
+          my: 5,
+          px: 5,
+        },
+      })}
+    >
+      <Grid item xs={12} sx={{ mb: 5 }}>
+        <StyledHeader variant="h3">
+          Kategorijos
+        </StyledHeader>
       </Grid>
-    </Container>
-  );
-};
+      {shopCardsData.map(({
+        title, image,
+      }) => (
+        <Grid
+          item
+          xs={12}
+          md={4}
+          sx={{ px: 2 }}
+        >
+          <CollectionCard key={title} title={title} image={image} />
+        </Grid>
+      ))}
+    </Grid>
+  </Container>
+);
 
 export default Shop;

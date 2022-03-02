@@ -30,7 +30,7 @@ const CollectionCard = ({
   >
     <CardMedia
       component="img"
-      height="200"
+      height="500"
       image={image}
       alt=""
     />
