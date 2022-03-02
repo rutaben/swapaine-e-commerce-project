@@ -10,8 +10,8 @@ import ProductPageInfo from './product-page-info-card';
 
 const ProductPage = () => {
   const [product, setProduct] = useState([]);
+  const [productImgs, setProductImgs] = useState([]);
   const { id } = useParams();
-  console.log(product);
 
   useEffect(() => {
     (async () => {
@@ -27,11 +27,19 @@ const ProductPage = () => {
     })();
   }, []);
 
+  useEffect(() => {
+    (async () => {
+      const getProductImgs = await ApiService.getProduct(id);
+      const productProps = Object.values(getProductImgs?.productImages).map(({ src }) => src);
+      setProductImgs(productProps);
+    })();
+  }, []);
+
   return (
     <Container sx={(theme) => ({ mt: `calc(${theme.mixins.toolbar.height}px + 30px)`, mb: 5 })}>
       <Grid container>
         <Grid item xs={12} sm={8}>
-          <ProductPageImages />
+          <ProductPageImages productImgs={productImgs} />
         </Grid>
         <Grid item xs={12} sm={4} sx={{ pl: 3 }}>
           <ProductPageInfo product={product} />
