@@ -22,14 +22,6 @@ const Hero = () => {
             height: '100vh', width: '100vw', objectFit: 'cover', objectPosition: 'center',
           }}
         />
-        {/* <video
-          autoPlay
-          loop
-          muted
-          style={{ height: '100%', width: '100%', objectFit: 'cover' }}
-        >
-          <source src={HeroVideo} type="video/mp4" />
-        </video> */}
       </HeroContainer>
     );
   }
