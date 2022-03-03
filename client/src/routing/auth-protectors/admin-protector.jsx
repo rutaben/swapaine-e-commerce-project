@@ -13,7 +13,7 @@ const AdminProtector = ({ children }) => {
   }
 
   if (auth.user.role !== 'ADMIN') {
-    return <Navigate to={routes.UserInfoPage} />;
+    return <Navigate to={routes.ProfilePage} />;
   }
 
   return children;

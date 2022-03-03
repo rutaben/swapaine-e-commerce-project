@@ -21,15 +21,6 @@ const UserProvider = ({ children }) => {
     })();
   }, []);
 
-  // const filtersArrToObj = ([
-  //   brand, category, color, size,
-  // ]) => ({
-  //   brand,
-  //   category,
-  //   color,
-  //   size,
-  // });
-
   const providerValue = useMemo(() => ({
     user,
   }), [user]);

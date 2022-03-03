@@ -45,7 +45,6 @@ const AdminDashboard = () => {
           gap: 3,
           px: 3,
           flexDirection: 'column',
-          mt: '100px',
         }}
       >
         <Typography variant="h4">Įkelti prekę</Typography>

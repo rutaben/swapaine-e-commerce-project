@@ -49,9 +49,10 @@ const Shop = () => (
           item
           xs={12}
           md={4}
+          key={title}
           sx={{ px: 2 }}
         >
-          <CollectionCard key={title} title={title} image={image} />
+          <CollectionCard title={title} image={image} />
         </Grid>
       ))}
     </Grid>

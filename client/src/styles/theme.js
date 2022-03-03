@@ -114,6 +114,9 @@ export const lightTheme = createTheme(theme, {
     footer: {
       height: 100,
     },
+    drawer: {
+      width: 240,
+    },
   },
 });
 
