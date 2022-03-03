@@ -3,11 +3,13 @@ import {
   Box, Typography, Container, Grid,
 } from '@mui/material';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { userSelector } from '../../../store/auth';
 import ProfileService from '../../../services/profile-service';
 import ProfilePagePhoto from './profile-page-photo';
 import ProfilePageUserInfo from './profile-page-user-info';
 import ProfilePageGallery from './profile-page-gallery';
+import routes from '../../../routing/routes';
 
 const ProfilePage = () => {
   const user = useSelector(userSelector);
@@ -63,14 +65,9 @@ const ProfilePage = () => {
               handleImageDelete={handleImageDelete}
             />
           </Grid>
-          <Grid item xs={12}>
-            <Box sx={{
-              mx: 2, my: 5, height: 100, backgroundColor: 'lightGrey',
-            }}
-            >
-              <Typography>Pakeisti slaptiką</Typography>
-            </Box>
-          </Grid>
+          <Link to={routes.AdminDashboard}>
+            <Typography textAlign="center">Daugiau</Typography>
+          </Link>
         </Grid>
       </Grid>
     </Container>
