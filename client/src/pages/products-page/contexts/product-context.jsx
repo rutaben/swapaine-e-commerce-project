@@ -94,6 +94,7 @@ const ProductProvider = ({ children }) => {
   const updateUrlParamsWithNewFilters = (newFilters) => {
     const newValuesArr = [];
     Object.entries(newFilters).forEach(([filterName, valueArr]) => {
+      searchParams.delete(filterName);
       newValuesArr.push(valueArr.map((obj) => ({ ...obj, filterName })));
     });
     const transformedValues = newValuesArr
@@ -109,11 +110,12 @@ const ProductProvider = ({ children }) => {
   };
 
   const handleFilterChange = (selectedOption, filterName) => {
+    console.log({ selectedOption, filterName });
     const newFilter = [...filters[filterName]];
     const foundSelectedOption = newFilter.find((x) => x.id === selectedOption.id);
-    if (foundSelectedOption) {
+    if (!foundSelectedOption.selected) {
       foundSelectedOption.selected = true;
-    }
+    } else { foundSelectedOption.selected = false; }
 
     const newFilters = {
       ...filters,
