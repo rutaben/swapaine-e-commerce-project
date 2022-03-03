@@ -7,7 +7,6 @@ import {
   Box,
   styled,
 } from '@mui/material';
-// import { ProductContext } from '../products-page/contexts/product-context';
 
 const StyledTextField = styled(TextField)(() => ({
   '.MuiInput-underline:before': {
@@ -70,7 +69,12 @@ const CheckboxFilter = ({
           >
             <div>{option.title}</div>
 
-            <Button sx={{ color: '#141414' }}>✕</Button>
+            <Button
+              sx={{ color: '#141414' }}
+              onClick={() => onChange(option, filterName)}
+            >
+              ✕
+            </Button>
 
           </Box>
         ))}
