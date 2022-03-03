@@ -23,7 +23,7 @@ const ProductProvider = ({ children }) => {
   const [filters, setFilters] = useState(initialFilters);
   const [products, setProducts] = useState(initialProducts);
   const [pagesCount, setPagesCount] = useState(1);
-  const [productGridPage, setProductGridPage] = useState(1);
+  const [currPage, setCurrPage] = useState(1);
 
   // filters
 
@@ -38,29 +38,27 @@ const ProductProvider = ({ children }) => {
 
   useEffect(() => {
     (async () => {
-      const getFilters = await Promise.all([
+      const fetchedFilters = await Promise.all([
         ApiService.getBrands(),
         ApiService.getCategories(),
         ApiService.getColors(),
         ApiService.getSizes(),
       ]);
       try {
-        const initFiltersValues = getFilters.map((filter) => Object.values(filter)).flat();
+        const initFiltersValues = fetchedFilters.map((filter) => Object.values(filter)).flat();
         const filtersObj = filtersArrToObj(initFiltersValues);
-
-        // jeigu imu search paramsus su page savybe, susigadina filtrai;
-        if (searchParams.get('page')) {
-          searchParams.delete('page');
-        }
 
         const urlParams = createUrlParamObj(searchParams);
         const urlParamObjEntries = Object.entries(urlParams);
+
         const filtersOptionsFromUrl = [];
         urlParamObjEntries.forEach(([filterName, paramValue]) => {
           const urlParamObjValueArr = [].concat(paramValue);
           urlParamObjValueArr.forEach((id) => {
-            const foundOption = filtersObj[filterName].find((x) => x.id === id);
-            filtersOptionsFromUrl.push(foundOption);
+            if (filtersObj[filterName]) {
+              const foundOption = filtersObj[filterName].find((x) => x.id === id);
+              filtersOptionsFromUrl.push(foundOption);
+            }
           });
         });
         const filtersOptionsIdsFromUrl = filtersOptionsFromUrl.map(({ id }) => id);
@@ -133,19 +131,17 @@ const ProductProvider = ({ children }) => {
       const params = createUrlParamObj(searchParams);
       const getProducts = await ApiService.getProducts(params);
       const totalPagesCount = getProducts.totalPages;
-      const currPage = getProducts.currentPage;
       const productsArr = Object.values(getProducts.data).flat();
       setProducts(productsArr);
       setPagesCount(totalPagesCount);
-      setProductGridPage(currPage);
     })();
   }, [filters, searchParams, pagesCount]);
 
   const getInitialSearchParams = () => {
     if (!searchParams.get('page')) {
-      searchParams.set('page', { productGridPage });
+      searchParams.set('page', 1);
       setSearchParams(searchParams);
-      return { page: { productGridPage } };
+      return { page: 1 };
     }
     return {
       page: parseInt(searchParams.get('page'), 10),
@@ -154,7 +150,7 @@ const ProductProvider = ({ children }) => {
 
   useEffect(() => {
     const { page } = getInitialSearchParams();
-    setProductGridPage(page);
+    setCurrPage(page);
   }, []);
 
   const setNewSearchParams = (newSearchParams) => {
@@ -167,7 +163,7 @@ const ProductProvider = ({ children }) => {
 
   const handleChange = (_, value) => {
     window.scrollTo(0, 0);
-    setProductGridPage(value);
+    setCurrPage(value);
     setNewSearchParams([
       { key: 'page', value },
     ]);
@@ -178,7 +174,7 @@ const ProductProvider = ({ children }) => {
     handleFilterChange,
     products,
     pagesCount,
-    productGridPage,
+    currPage,
     handleChange,
   }), [products, filters]);
 
