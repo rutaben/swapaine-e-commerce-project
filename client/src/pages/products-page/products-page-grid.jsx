@@ -8,7 +8,7 @@ import { ProductContext } from './contexts/product-context';
 
 const ProductsPageGrid = () => {
   const {
-    products, pagesCount, productGridPage, handleChange,
+    products, pagesCount, currPage, handleChange,
   } = useContext(ProductContext);
 
   return (
@@ -27,7 +27,7 @@ const ProductsPageGrid = () => {
         </Grid>
       ))}
       <Grid item xs={12}>
-        <Pagination shape="rounded" count={pagesCount} page={productGridPage} onChange={handleChange} />
+        <Pagination shape="rounded" count={pagesCount} page={currPage} onChange={handleChange} />
       </Grid>
     </Grid>
   );
