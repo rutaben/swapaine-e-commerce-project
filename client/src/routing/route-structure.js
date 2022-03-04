@@ -33,7 +33,6 @@ const routeStructure = [
       { path: 'favorites', pageName: 'FavoritesPage', auth: USER },
       { path: 'orders', pageName: 'OrdersPage', auth: USER },
       { path: 'user-info', pageName: 'UserInfoPage', auth: USER },
-      // { path: 'orders', pageName: 'OrdersPage', auth: USER },
       { path: 'admin/dashboard', pageName: 'AdminDashboard', auth: ADMIN },
       // { path: 'admin/products', pageName: 'ProductPage', auth: ADMIN },
       // { path: 'admin/users', pageName: 'UsersPage', auth: ADMIN },
