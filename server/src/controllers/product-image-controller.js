@@ -10,60 +10,43 @@ const getProductImages = async (req, res) => {
 };
 
 const uploadProductImage = async (req, res) => {
-  const productImageDoc = await ProductImageModel(req.body);
+  let productImageDoc = await ProductImageModel(req.body);
   try {
+    productImageDoc['src'] = req.file.path;
     await productImageDoc.save();
     const productImage = new ProductImageViewModel(productImageDoc);
     res.status(201).json(productImage);
   } catch (error) {
     res.status(400).json({
-      message: `Klaida: jau yra toks filtras`,
+      message: `Error: Cannot upload the image. Make sure it is under 1MB and only one image is being 
+      uploaded at a time`,
     });
   }
-};
-
-// const uploadProductImages = async (req, res) => {
-//   const userDoc = await UserModel.findOne({ email: req.user.email });
-//   const productImgData = req.files.map(({ filename }) => ({
-//     src: filename,
-//   }));
-
-//   const productImgDocs = await ProductImageModel.insertMany(productImgData);
-//   const productImages = productImgDocs.map(x => new ProductImageViewModel(x));
-
-//   res.status(200).send({
-//     productImages,
-//     product: productDoc.id,
-//   });
-// };
-
+}
 
 // const deleteProductImage = async (req, res) => {
-//     const { id } = req.params;
-//     try {
-//         const imageDoc = await ImageModel.findById(id);
-//         await UserModel.findOneAndUpdate({ mainImg: id }, { mainImg: null });
-//         const { PUBLIC_PATH, IMG_FOLDER_NAME } = process.env;
-//         const imgPath = `${PUBLIC_PATH}/${IMG_FOLDER_NAME}/${imageDoc.src}`;
-//         deleteFile(imgPath);
+//   const { id } = req.params;
+//   try {
+//     const productImageDoc = await ProductImageModel.findById(id);
 
-//         await imageDoc.delete();
+//* čia įgalinsiu trynimą (reikia pasirašyti script'ą, kuris ištrauktų public_id kiekvenai nuotraukai,
+//* pagal kuriuos galėsiu trinti ir atnaujinti nuotraukas)
 
-//         res.status(200).send({
-//             message: 'Picture has been deleted',
-//             id,
-//         });
+//     res.status(200).send({
+//       message: 'Picture has been deleted',
+//       id,
+//     });
 
 
-//     } catch (error) {
-//         res.status(404).send({
-//             message: 'Cannot find a picture',
-//         })
-//     }
+//   } catch (error) {
+//     res.status(404).send({
+//       message: 'Cannot find a picture',
+//     })
+//   }
 // }
 
 module.exports = {
   getProductImages,
   uploadProductImage,
   // deleteProductImage,
-}
+};

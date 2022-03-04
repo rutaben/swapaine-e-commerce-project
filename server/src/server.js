@@ -31,7 +31,6 @@ const corsOptions = {
 // Middlewares
 server.use(morgan('tiny'));
 server.use(cors(corsOptions));
-// leidzia is public folderio sharint failus
 server.use(express.static(PUBLIC_PATH));
 server.use(express.json());
 
