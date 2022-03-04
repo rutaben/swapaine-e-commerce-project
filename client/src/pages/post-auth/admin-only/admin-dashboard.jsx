@@ -53,19 +53,19 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     (async () => {
-      const fetchedFilters = await Promise.all([
+      const fetchedProps = await Promise.all([
         ApiService.getBrands(),
         ApiService.getCategories(),
         ApiService.getColors(),
         ApiService.getSizes(),
       ]);
       try {
-        const initFiltersValues = fetchedFilters.map((filter) => Object.values(filter)).flat();
-        const filtersObj = filtersArrToObj(initFiltersValues);
-        Object.entries(filtersObj).map(([key, value]) => ({
+        const initPropsValues = fetchedProps.map((prop) => Object.values(prop)).flat();
+        const propsObj = filtersArrToObj(initPropsValues);
+        Object.entries(propsObj).map(([key, value]) => ({
           [key]: value.unshift(defaultOption),
         }));
-        setProps(filtersObj);
+        setProps(propsObj);
       } catch (err) {
         throw new Error(err);
       }
