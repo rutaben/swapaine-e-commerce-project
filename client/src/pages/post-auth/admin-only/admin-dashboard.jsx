@@ -26,8 +26,15 @@ const initialValues = {
   images: [],
 };
 
+const initialProps = {
+  brand: [],
+  category: [],
+  color: [],
+  size: [],
+};
+
 const AdminDashboard = () => {
-  const [props, setProps] = useState(defaultOption);
+  const [props, setProps] = useState(initialProps);
 
   const onSubmit = (values) => {
     const formattedData = {
