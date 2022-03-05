@@ -31,7 +31,7 @@ const planCardsData = [
 
 const Plans = () => (
   <Box sx={{
-    backgroundImage: `url(${PlansImage})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'right', display: 'flex', alignItems: 'center',
+    backgroundImage: `url(${PlansImage})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'right', display: 'flex', alignItems: 'center',
   }}
   >
     <Container maxWidth="md">
@@ -42,14 +42,15 @@ const Plans = () => (
           mt: 3,
           mb: 8,
           [theme.breakpoints.down('md')]: {
-            mb: 2,
+            mt: 0,
+            mb: 8,
           },
         })}
       >
         <StyledGrid item xs={12}>
           <StyledHeader
-            variant="h3"
-            sx={() => ({ pb: 4 })}
+            variant="h2"
+            sx={() => ({ pb: 4, fontFamily: 'Cormorant Garamond' })}
           >
             Narystės planai
           </StyledHeader>

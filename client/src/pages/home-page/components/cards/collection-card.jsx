@@ -20,6 +20,7 @@ const StyledCard = styled(Card)(() => ({
 const StyledTypography = styled(Typography)(() => ({
   fontWeight: 700,
   textTransform: 'uppercase',
+  fontFamily: 'Cormorant Garamond',
 }));
 
 const CollectionCard = ({

@@ -6,99 +6,80 @@ import {
   Typography,
   styled,
 } from '@mui/material';
-import MissionImage from '../../assets/images/mission-image.png';
-import UnderlinedButton from './components/buttons/underlined-button';
-
-const StyledContainer = styled(Box)(() => ({
-  width: '100vw',
-  backgroundImage: `url(${MissionImage})`,
-  backgroundPosition: 'left',
-  backgroundSize: 'contain',
-  backgroundRepeat: 'no-repeat',
-}));
 
 const StyledHeader = styled(Typography)(() => ({
   fontWeight: 700,
   textTransform: 'uppercase',
-  fontFamily: 'Lexend Deca',
+  fontFamily: 'Cormorant Garamond',
 }));
 
 const StyledTextbox = styled(Box)(() => ({
-  width: '45%',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'flex-start',
 }));
 
 const Mission = () => (
-  <StyledContainer sx={{ my: 15, px: 5 }}>
-    <Container
-      maxWidth="md"
+  <Container
+    maxWidth="lg"
+    sx={(theme) => ({
+      [theme.breakpoints.down('md')]: {
+        mt: 10,
+        px: 7,
+      },
+      [theme.breakpoints.up('md')]: {
+        mt: 13,
+        px: 10,
+      },
+      [theme.breakpoints.up('lg')]: {
+        px: 0,
+      },
+    })}
+  >
+    <Grid
+      container
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+      }}
     >
-      <Grid container>
-        <Grid item xs={12} sx={{ width: '50%' }}>
-          <Box height="100%">
-            <StyledHeader
-              variant="h2"
-              sx={(theme) => ({
-                [theme.breakpoints.down('lg')]: {
-                  width: '50%',
-                  px: 5,
-                },
-                [theme.breakpoints.down('sm')]: {
-                  width: '100%',
-                  px: 3,
-                  mt: -5,
-                  mb: 3,
-                },
-              })}
-            >
-              Kitas
-              <br />
-              žingsnis
-              <br />
-              tvarumo
-              <br />
-              link
-            </StyledHeader>
-          </Box>
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          sx={{ display: 'flex', justifyContent: 'flex-end' }}
-        >
-          <StyledTextbox
-            sx={(theme) => ({
-              gap: 3,
-              mt: -3,
-              [theme.breakpoints.down('lg')]: {
-                width: '55%',
-                px: 3,
-              },
-              [theme.breakpoints.down('sm')]: {
-                width: '100%',
-                mt: 4,
-              },
-            })}
-          >
-            <Typography variant="body1" sx={{ fontWeight: 700 }}>
-              Siekiant sumažinti mados įtaką aplinkai vien tik tvarios drabužių gamybos nepakanka.
-            </Typography>
-            <Typography variant="body2">
-              Kiekvienas drabužis vidutiniškai nešiojamas tik 7 kartus, o moterys dėvi
-              tik iki 30% drabužių, esančių spintoje.
-              <br />
-              <br />
-              Mūsų siekis - sukurti sąlygas tvaresniam vartojimui ir suteikti galimybę papildyti
-              spintą aukštos kokybės rūbais jums tik panorėjus, o vėliau - leisti jais džiaugtis
-              ir kitiems.
-            </Typography>
-            <UnderlinedButton title="Kaip tai veikia" />
-          </StyledTextbox>
-        </Grid>
+      <Grid item xs={12} sx={{ width: '50%' }}>
+        <Box height="100%">
+          <StyledHeader variant="h2" align="center">
+            Tvaraus vartojimo link
+          </StyledHeader>
+        </Box>
       </Grid>
-    </Container>
-  </StyledContainer>
+      <Grid
+        item
+        xs={12}
+      >
+        <StyledTextbox
+          sx={(theme) => ({
+            gap: 3,
+            mt: 7,
+            [theme.breakpoints.down('md')]: {
+              mt: 5,
+            },
+          })}
+        >
+          <Typography variant="body1">
+            Siekiant sumažinti mados įtaką aplinkai vien tik tvarios drabužių gamybos nepakanka.
+            Kiekvienas drabužis vidutiniškai nešiojamas tik 7 kartus, o moterys dėvi
+            tik iki 30% drabužių, esančių spintoje.
+          </Typography>
+          <Typography variant="body1" sx={{ mb: 5 }}>
+            Mūsų siekis - sukurti sąlygas tvaresniam vartojimui ir suteikti galimybę papildyti
+            spintą aukštos kokybės rūbais jums tik panorėjus, o vėliau - leisti jais džiaugtis
+            ir kitiems.
+          </Typography>
+          {/* <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+            <UnderlinedButton title="Kaip tai veikia" />
+          </Box> */}
+        </StyledTextbox>
+      </Grid>
+    </Grid>
+  </Container>
 );
+
 export default Mission;

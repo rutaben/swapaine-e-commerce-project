@@ -5,23 +5,18 @@ import {
   Grid,
   styled,
 } from '@mui/material';
-import InstructionsImage from '../../assets/images/instructions-image.png';
-import Icon1 from '../../assets/images/instructions-icon-1.png';
-import Icon2 from '../../assets/images/instructions-icon-2.png';
-import Icon3 from '../../assets/images/instructions-icon-3.png';
+import Icon1 from '../../assets/images/instructions-1.png';
+import Icon2 from '../../assets/images/instructions-2.png';
+import Icon3 from '../../assets/images/instructions-3.png';
 import FeatureCard from './components/cards/feature-card';
 
 const StyledContainer = styled(Grid)(() => ({
   display: 'flex',
   justifyContent: 'center',
-  backgroundImage: `url(${InstructionsImage})`,
-  backgroundPosition: 'center',
-  backgroundSize: 'contain',
-  backgroundRepeat: 'no-repeat',
 }));
 
 const StyledTypography = styled(Typography)(() => ({
-  fontFamily: 'Lexend Deca',
+  fontFamily: 'Cormorant Garamond',
   textTransform: 'uppercase',
   fontWeight: 700,
 }));
@@ -49,7 +44,8 @@ const Instructions = () => (
     container
     sx={(theme) => ({
       px: 15,
-      my: 15,
+      mt: 5,
+      mb: 10,
       [theme.breakpoints.down('md')]: {
         my: 0,
         px: 20,
@@ -63,17 +59,17 @@ const Instructions = () => (
   >
     <Grid item xs={12}>
       <StyledTypography
-        variant="h3"
+        variant="h2"
         align="center"
-        sx={{ mb: 3 }}
+        sx={{ mb: 7 }}
       >
-        Kaip tai veikia
+        Kaip tai veikia?
       </StyledTypography>
     </Grid>
     {instructionsCardsData.map(({ title, body, image }) => (
       <Grid item xs={12} md={4} key={title}>
         <FeatureCard key={title} title={title} body={body}>
-          <Avatar variant="square" src={image} sx={{ width: '300px', height: '300px' }} />
+          <Avatar variant="square" src={image} sx={{ width: '80px', height: '120px' }} />
         </FeatureCard>
       </Grid>
     ))}

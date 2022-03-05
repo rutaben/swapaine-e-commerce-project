@@ -6,9 +6,9 @@ import {
   CardContent,
   styled,
 } from '@mui/material';
-import { NavLink } from 'react-router-dom';
 import CheckIcon from '@mui/icons-material/Check';
-import BlackButton from '../buttons/black-button';
+import ContainedButtonDark from '../../../../components/buttons/contained-button-dark';
+import StyledNavlink from '../../../../components/partials/navbar/styled-nav-link';
 
 const StyledCard = styled(Card)(({ theme }) => ({
   display: 'flex',
@@ -29,6 +29,8 @@ const StyledCard = styled(Card)(({ theme }) => ({
 
 const StyledBody = styled(Typography)(() => ({
   lineHeight: 2,
+  fontWeight: 300,
+
 }));
 
 const StyledCheckIcon = styled(CheckIcon)(() => ({
@@ -43,10 +45,10 @@ const PlanCard = ({
   <StyledCard>
     <CardContent>
       <Typography
-        variant="h5"
+        variant="h4"
         align="center"
         sx={() => ({
-          mb: 3, fontWeight: 700,
+          mb: 3, fontFamily: 'Cormorant Garamond', fontWeight: 600, textTransform: 'uppercase',
         })}
       >
         {title}
@@ -55,7 +57,7 @@ const PlanCard = ({
         display: 'flex', alignItems: 'flex-end', justifyContent: 'center',
       }}
       >
-        <StyledBody variant="h4" sx={{ fontWeight: 700 }}>
+        <StyledBody variant="h3" sx={{ fontWeight: 600 }}>
           €
           {pricePromo}
         </StyledBody>
@@ -64,10 +66,10 @@ const PlanCard = ({
           /mėn.
         </StyledBody>
       </Box>
-      <NavLink to="/checkout" sx={{ textDecoration: 'none' }}>
-        <BlackButton title="Išbandyti" />
-      </NavLink>
-      <StyledBody variant="body2">
+      <StyledNavlink to="/checkout">
+        <ContainedButtonDark title="Išbandyti" />
+      </StyledNavlink>
+      <StyledBody variant="body2" sx={{ mt: 2 }}>
         <StyledCheckIcon />
         Iki
         {' '}

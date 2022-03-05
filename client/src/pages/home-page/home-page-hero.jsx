@@ -1,8 +1,7 @@
 import React from 'react';
-// import HeroVideo from '../../assets/videos/hero-video-1.mp4';
-import HeroContainer from './components/hero-container';
+import { Paper } from '@mui/material';
 
-const Hero = () => {
+const HeroImage = () => {
   const [width, setWidth] = React.useState(window.innerWidth);
   const md = 900;
   React.useEffect(() => {
@@ -14,29 +13,28 @@ const Hero = () => {
   }, []);
   if (width > md) {
     return (
-      <HeroContainer>
+      <Paper elevation={0} sx={{ height: '100vh' }}>
         <img
-          src="https://images.pexels.com/photos/5119920/pexels-photo-5119920.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
+          src="https://res.cloudinary.com/rutaben/image/upload/v1646480745/pexels-photo-6467614_fvokod.jpg"
           alt=""
           style={{
-            height: '100vh', width: '100vw', objectFit: 'cover', objectPosition: 'center',
+            height: '100vh', width: '100vw', objectFit: 'cover', objectPosition: 'right',
           }}
         />
-      </HeroContainer>
+      </Paper>
     );
   }
   return (
-    <HeroContainer>
-
+    <Paper elevation={0} sx={{ height: '100vh' }}>
       <img
-        src="https://images.pexels.com/photos/5119920/pexels-photo-5119920.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
+        src="https://res.cloudinary.com/rutaben/image/upload/v1646479202/image_969c12e2-6a37-4414-8970-6a80346347c0_va4tph.jpg"
         alt=""
         style={{
           height: '100vh', width: '100vw', objectFit: 'cover', objectPosition: 'center',
         }}
       />
-    </HeroContainer>
+    </Paper>
   );
 };
 
-export default Hero;
+export default HeroImage;
