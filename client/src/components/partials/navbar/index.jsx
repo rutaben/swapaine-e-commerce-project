@@ -30,7 +30,7 @@ const Navbar = () => {
     <AppBar
       position="fixed"
       elevation={0}
-      sx={(theme) => ({ backgroundColor: theme.palette.background.default })}
+      sx={(theme) => ({ backgroundColor: theme.palette.background.default, borderBottom: '1px solid lightGrey' })}
     >
       <Container maxWidth="lg">
         <Toolbar disableGutters>
