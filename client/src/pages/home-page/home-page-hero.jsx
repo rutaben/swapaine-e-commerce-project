@@ -1,7 +1,7 @@
 import React from 'react';
-import { Paper } from '@mui/material';
+import HeroContainer from './components/containers/hero-container';
 
-const HeroImage = () => {
+const Hero = () => {
   const [width, setWidth] = React.useState(window.innerWidth);
   const md = 900;
   React.useEffect(() => {
@@ -13,7 +13,10 @@ const HeroImage = () => {
   }, []);
   if (width > md) {
     return (
-      <Paper elevation={0} sx={{ height: '100vh' }}>
+      <HeroContainer
+        heroText="Moderni spinta"
+        title="Žiūrėti"
+      >
         <img
           src="https://res.cloudinary.com/rutaben/image/upload/v1646480745/pexels-photo-6467614_fvokod.jpg"
           alt=""
@@ -21,11 +24,11 @@ const HeroImage = () => {
             height: '100vh', width: '100vw', objectFit: 'cover', objectPosition: 'right',
           }}
         />
-      </Paper>
+      </HeroContainer>
     );
   }
   return (
-    <Paper elevation={0} sx={{ height: '100vh' }}>
+    <HeroContainer>
       <img
         src="https://res.cloudinary.com/rutaben/image/upload/v1646479202/image_969c12e2-6a37-4414-8970-6a80346347c0_va4tph.jpg"
         alt=""
@@ -33,8 +36,8 @@ const HeroImage = () => {
           height: '100vh', width: '100vw', objectFit: 'cover', objectPosition: 'center',
         }}
       />
-    </Paper>
+    </HeroContainer>
   );
 };
 
-export default HeroImage;
+export default Hero;
