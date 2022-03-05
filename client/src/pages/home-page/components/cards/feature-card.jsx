@@ -3,7 +3,6 @@ import {
   Typography,
   Card,
   CardContent,
-  // Avatar,
   styled,
 } from '@mui/material';
 
@@ -29,10 +28,10 @@ const FeatureCard = ({
     }}
     >
       {children}
-      <StyledTypography variant="body1" sx={{ fontWeight: 700, my: 2 }}>
+      <StyledTypography variant="body1" sx={{ fontWeight: 500, mb: 1, mt: 2 }}>
         {title}
       </StyledTypography>
-      <StyledTypography variant="body2" sx={{ mb: 3 }}>
+      <StyledTypography variant="body2" sx={{ fontWeight: 300 }}>
         {body}
       </StyledTypography>
     </CardContent>

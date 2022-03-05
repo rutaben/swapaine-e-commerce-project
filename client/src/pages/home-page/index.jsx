@@ -12,8 +12,8 @@ const Homepage = () => (
     <Hero />
     <Mission />
     <Features />
-    <Plans />
     <Shop />
+    <Plans />
     <Instructions />
   </Box>
 );

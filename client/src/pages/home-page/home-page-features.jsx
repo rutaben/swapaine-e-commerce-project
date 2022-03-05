@@ -2,17 +2,20 @@ import React from 'react';
 
 import {
   Grid,
-  Avatar,
 } from '@mui/material';
-import EcoImage from '../../assets/images/icon-eco.png';
-import PackageImage from '../../assets/images/icon-package.png';
-import CancellationImage from '../../assets/images/icon-cancellation.png';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import ParkSharpIcon from '@mui/icons-material/ParkSharp';
+import VerifiedIcon from '@mui/icons-material/Verified';
+// import EcoImage from '../../assets/images/icon-eco.png';
+// import PackageImage from '../../assets/images/icon-package.png';
+// import CancellationImage from '../../assets/images/icon-cancellation.png';
 import FeatureCard from './components/cards/feature-card';
+import ContainedButtonDark from '../../components/buttons/contained-button-dark';
 
 const featuresCardsData = [
-  { title: 'Draugiška aplinkai', body: 'Nesirūpinkite drabužių skalbimu - juos valome ekologiškoje valykloje.', image: EcoImage },
-  { title: 'Mažiau išteklių siuntimui', body: 'Užsakymai pristatomi iš vietinių sandėlių ir siunčiami pakuotėse iš perdirbtų drabužių.', image: PackageImage },
-  { title: 'Jokių įsipareigojimų', body: 'Prenumeratą galite atšaukti bet kada. Jokių klausimų ar papildomų išlaidų.', image: CancellationImage },
+  { title: 'Draugiška aplinkai', body: 'Nesirūpinkite drabužių skalbimu - juos valome ekologiškoje valykloje.', icon: <ParkSharpIcon fontSize="large" /> },
+  { title: 'Mažiau išteklių siuntimui', body: 'Užsakymai pristatomi daugkartinėse pakuotėse iš vietinių sandėlių.', icon: <LocalShippingIcon fontSize="large" /> },
+  { title: 'Jokių įsipareigojimų', body: 'Prenumeratą galite atšaukti bet kada. Jokių klausimų ar papildomų išlaidų.', icon: <VerifiedIcon fontSize="large" /> },
 ];
 
 const Features = () => (
@@ -23,26 +26,32 @@ const Features = () => (
       justifyContent: 'center',
       alignItems: 'center',
       px: 15,
-      my: 15,
+      mb: 10,
+      mt: 2,
+      [theme.breakpoints.down('lg')]: {
+        px: 5,
+      },
       [theme.breakpoints.down('md')]: {
-        my: 0,
-        px: 20,
+        mb: 6,
+        px: 15,
       },
       [theme.breakpoints.down('sm')]: {
-        my: 0,
         px: 8,
       },
     })}
   >
     {featuresCardsData.map(({
-      title, body, image,
+      title, body, icon,
     }) => (
-      <Grid item xs={12} md={4} key={title} sx={{ px: 3 }}>
+      <Grid item xs={12} md={4} key={title} sx={{ px: 2, mb: 3 }}>
         <FeatureCard title={title} body={body}>
-          <Avatar variant="square" src={image} sx={{ width: '120px', height: '120px' }} />
+          {icon}
         </FeatureCard>
       </Grid>
     ))}
+    <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center', gap: 3 }}>
+      <ContainedButtonDark title="Žiūrėti planus" />
+    </Grid>
   </Grid>
 );
 

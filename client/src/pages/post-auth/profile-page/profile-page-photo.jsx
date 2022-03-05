@@ -6,7 +6,7 @@ import {
   Button,
 } from '@mui/material';
 // import ClearIcon from '@mui/icons-material/Clear';
-import ModalCard from '../../components/modal-card';
+import ModalCard from '../../../components/cards/modal-card';
 // import ProfileService from '../../../services/profile-service';
 import ProfilePageImageGrid from './profile-page-image-grid';
 

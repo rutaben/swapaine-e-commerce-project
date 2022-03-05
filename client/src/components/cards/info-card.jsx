@@ -3,7 +3,6 @@ import {
   Card,
   CardActions,
   CardContent,
-  // Typography,
 } from '@mui/material';
 import BlackButton from '../../pages/home-page/components/buttons/black-button';
 

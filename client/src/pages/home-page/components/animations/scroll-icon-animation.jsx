@@ -3,8 +3,8 @@ import { Box } from '@mui/material';
 
 const ScrollIconAnimation = () => (
   <Box sx={{
-    width: '35px',
-    height: '63px',
+    width: '33px',
+    height: '55px',
     border: '2px solid #fafafa',
     borderRadius: '60px',
     position: 'relative',
@@ -22,8 +22,8 @@ const ScrollIconAnimation = () => (
       animation: 'wheel 2s infinite',
     },
     '@keyframes wheel': {
-      '0%': { opacity: '0', top: '12px' },
-      '100%': { opacity: '1', top: '38px' },
+      '0%': { opacity: '0', top: '10px' },
+      '100%': { opacity: '1', top: '33px' },
     },
   }}
   />
