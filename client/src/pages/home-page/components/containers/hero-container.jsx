@@ -20,7 +20,7 @@ const StyledHeader = styled(Typography)(({ theme }) => ({
   fontFamily: 'Cormorant Garamond',
 }));
 
-const HeroContainer = ({ children }) => (
+const HeroContainer = ({ heroText, title, children }) => (
   <StyledBox
     height="100vh"
   >
@@ -40,9 +40,9 @@ const HeroContainer = ({ children }) => (
         variant="h1"
         sx={{ mb: 3 }}
       >
-        Moderni spinta
+        {heroText}
       </StyledHeader>
-      <ContainedButton title="Žiūrėti" />
+      <ContainedButton title={title} />
     </StyledBox>
     <Box
       sx={{
