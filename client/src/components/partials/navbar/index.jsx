@@ -1,15 +1,16 @@
 import React from 'react';
 import {
-  Toolbar, Box, AppBar, Container,
+  Toolbar, AppBar, Container,
 } from '@mui/material';
 import Desktop from './desktop';
 import Mobile from './mobile';
-import NavbarScrollAction from './navbar-scroll-action';
+import Logo from '../../../assets/images/logo.png';
 import routes from '../../../routing/routes';
 
 const pages = [
-  { title: 'PAGRINDINIS', link: routes.Homepage },
-  { title: 'KATALOGAS', link: routes.ProductsPage },
+  { title: Logo, link: routes.Homepage },
+  { title: 'Katalogas', link: routes.ProductsPage },
+  { title: 'Prisijungti', link: routes.LoginPage },
 ];
 
 const breakPoint = 'md';
@@ -26,24 +27,24 @@ const Navbar = () => {
   };
 
   return (
-    <Box>
-      <NavbarScrollAction>
-        <AppBar position="fixed" elevation={0} sx={{ backgroundColor: '#f7ea49' }}>
-          <Container maxWidth="lg">
-            <Toolbar disableGutters>
-              <Mobile
-                pages={pages}
-                handleOpenNavMenu={handleOpenNavMenu}
-                handleCloseNavMenu={handleCloseNavMenu}
-                anchorElNav={anchorElNav}
-                breakPoint={breakPoint}
-              />
-              <Desktop pages={pages} breakPoint={breakPoint} />
-            </Toolbar>
-          </Container>
-        </AppBar>
-      </NavbarScrollAction>
-    </Box>
+    <AppBar
+      position="sticky"
+      elevation={0}
+      sx={(theme) => ({ backgroundColor: theme.palette.background.default })}
+    >
+      <Container maxWidth="lg">
+        <Toolbar disableGutters>
+          <Mobile
+            pages={pages}
+            handleOpenNavMenu={handleOpenNavMenu}
+            handleCloseNavMenu={handleCloseNavMenu}
+            anchorElNav={anchorElNav}
+            breakPoint={breakPoint}
+          />
+          <Desktop pages={pages} breakPoint={breakPoint} />
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
 };
 

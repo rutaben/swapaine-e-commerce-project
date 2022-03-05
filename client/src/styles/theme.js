@@ -27,8 +27,7 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: [
-      'Open Sans',
-      'sans-serif',
+      'Josefin Sans', 'sans-serif',
     ].join(','),
   },
   overrides: {
@@ -109,7 +108,7 @@ theme.typography.body2 = {
 export const lightTheme = createTheme(theme, {
   mixins: {
     toolbar: {
-      height: 80,
+      height: 120,
     },
     footer: {
       height: 100,

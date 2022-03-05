@@ -30,12 +30,10 @@ const NavbarAuthMenu = () => {
         open={menuOpen}
         onClose={handleCloseMenu}
         anchorEl={anchorRef.current}
-        // anchorOrigin - Mygtuko(enchorEl) atspirties taškas
         anchorOrigin={{
           horizontal: 'right',
           vertical: 'bottom',
         }}
-        // transformOrigin - <Menu> komponento turinio atspirties taškas
         transformOrigin={{
           horizontal: 'right',
           vertical: 'top',

@@ -15,6 +15,7 @@ const Mobile = ({
   const mobileStyles = {
     flexGrow: 1,
     display: { xs: 'flex', [breakPoint]: 'none' },
+    width: '50%',
   };
 
   return (
@@ -46,16 +47,22 @@ const Mobile = ({
           display: { xs: 'block', md: 'none' },
         }}
       >
-        {pages.map(({ title, link }) => (
-          <MenuItem key={title}>
-            <StyledNavLink
-              to={link}
-              onClick={handleCloseNavMenu}
-            >
-              {title}
-            </StyledNavLink>
-          </MenuItem>
-        ))}
+        <MenuItem sx={{ pr: 15 }}>
+          <StyledNavLink
+            to={pages[1].link}
+            onClick={handleCloseNavMenu}
+          >
+            {pages[1].title}
+          </StyledNavLink>
+        </MenuItem>
+        <MenuItem sx={{ pr: 15 }}>
+          <StyledNavLink
+            to={pages[2].link}
+            onClick={handleCloseNavMenu}
+          >
+            {pages[2].title}
+          </StyledNavLink>
+        </MenuItem>
       </Menu>
     </Box>
   );

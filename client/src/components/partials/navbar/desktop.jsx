@@ -1,52 +1,62 @@
 import React from 'react';
 import {
-  Grid,
   Box,
   Avatar,
+  Typography,
 } from '@mui/material';
-// import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { useSelector } from 'react-redux';
-import PersonOutlineSharpIcon from '@mui/icons-material/PersonOutlineSharp';
 import { authSelector } from '../../../store/auth';
 import NavbarAuthMenu from './navbar-auth-menu';
-import routes from '../../../routing/routes';
 import StyledNavlink from './styled-nav-link';
-import Logo from '../../../assets/images/logo.png';
 
 const Desktop = ({ pages, breakPoint }) => {
   const desktopStyles = {
+    width: '100%',
     display: { xs: 'none', [breakPoint]: 'flex' },
+    justifyContent: 'end',
+    alignItems: 'center',
+    gap: 5,
   };
   const auth = useSelector(authSelector);
 
   return (
-    <Grid
-      container
-      sx={{
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-      }}
+    <Box sx={{
+      display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%',
+    }}
     >
-      <Grid item xs={3} sx={{ display: 'flex', alignItems: 'center' }}>
-        <Avatar variant="square" src={Logo} sx={{ width: '140px', height: '30px' }} />
-      </Grid>
-      <Grid item xs={6}>
-        <Box sx={{ gap: 5, ...desktopStyles }}>
-          {pages.map(({ title, link }) => (
-            <StyledNavlink key={title} to={link}>{title}</StyledNavlink>
-          ))}
+      <Box sx={{
+        display: 'flex', width: '100%', justifyContent: 'end', gap: 1,
+      }}
+      >
+        <SearchOutlinedIcon />
+        <Box sx={{ ...desktopStyles, justifyContent: 'start' }}>
+          <Typography sx={{ fontWeight: 300 }}>Paieška</Typography>
         </Box>
-      </Grid>
-      <Grid item xs={3} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'end' }}>
+      </Box>
+
+      <Box sx={{
+        display: 'block', position: 'absolute', left: '50%', marginLeft: '-88px', top: '35%',
+      }}
+      >
+        <StyledNavlink to={pages[0].link}>
+          <Avatar variant="square" src={pages[0].title} sx={{ width: '178px', height: '30px' }} />
+        </StyledNavlink>
+      </Box>
+
+      <Box sx={{ ...desktopStyles }}>
+        <StyledNavlink to={pages[1].link}>
+          {pages[1].title}
+        </StyledNavlink>
         {
         !auth.loggedIn ? (
-          <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center' }}>
-            {/* <StyledNavlink to=""><SearchOutlinedIcon fontSize="small" /></StyledNavlink> */}
-            <StyledNavlink to={routes.LoginPage}><PersonOutlineSharpIcon fontSize="small" /></StyledNavlink>
-          </Box>
+          <StyledNavlink to={pages[2].link}>
+            {pages[2].title}
+          </StyledNavlink>
         ) : <NavbarAuthMenu />
       }
-      </Grid>
-    </Grid>
+      </Box>
+    </Box>
   );
 };
 
