@@ -31,16 +31,16 @@ const Desktop = ({ pages, breakPoint }) => {
       >
         <SearchOutlinedIcon />
         <Box sx={{ ...desktopStyles, justifyContent: 'start' }}>
-          <Typography sx={{ fontWeight: 300 }}>Paieška</Typography>
+          <Typography variant="body2" sx={{ fontWeight: 300 }}>Paieška</Typography>
         </Box>
       </Box>
 
       <Box sx={{
-        display: 'block', position: 'absolute', left: '50%', marginLeft: '-88px', top: '35%',
+        display: 'block', position: 'absolute', left: '50%', marginLeft: '-60px', top: '50%', marginTop: '-13px',
       }}
       >
         <StyledNavlink to={pages[0].link}>
-          <Avatar variant="square" src={pages[0].title} sx={{ width: '178px', height: '30px' }} />
+          <Avatar variant="square" src={pages[0].title} sx={{ width: '120px', height: '20px' }} />
         </StyledNavlink>
       </Box>
 
