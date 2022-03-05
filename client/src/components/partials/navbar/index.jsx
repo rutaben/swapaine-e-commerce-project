@@ -28,7 +28,7 @@ const Navbar = () => {
 
   return (
     <AppBar
-      position="sticky"
+      position="fixed"
       elevation={0}
       sx={(theme) => ({ backgroundColor: theme.palette.background.default })}
     >
