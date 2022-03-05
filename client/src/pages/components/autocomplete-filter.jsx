@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {
+  Typography,
   TextField,
   Autocomplete,
   Button,
@@ -8,19 +9,19 @@ import {
   styled,
 } from '@mui/material';
 
-const StyledTextField = styled(TextField)(() => ({
-  '.MuiInput-underline:before': {
-    borderBottomColor: '#fafafa',
-  },
-  '.MuiInput-underline:hover:before': {
-    borderBottomColor: '#fafafa',
-  },
-  '.MuiInput-underline:hover:after': {
-    borderBottomColor: '#fafafa',
+const StyledAutocomplete = styled(Autocomplete)(({ theme }) => ({
+  '& .MuiAutocomplete-popupIndicator': {
+    color: theme.palette.primary.contrastText,
   },
 }));
 
-const CheckboxFilter = ({
+const StyledTextField = styled(TextField)(() => ({
+  '& .MuiInput-input': {
+    color: 'rgba(0,0,0,0.0)',
+  },
+}));
+
+const AutocompleteFilter = ({
   filterOptions,
   filterName,
   label,
@@ -30,7 +31,8 @@ const CheckboxFilter = ({
 
   return (
     <>
-      <Autocomplete
+      <StyledAutocomplete
+        disableClearable
         options={filterOptions}
         getOptionLabel={(option) => option.title}
         filterName={filterName}
@@ -45,13 +47,18 @@ const CheckboxFilter = ({
         renderInput={(params) => (
           <StyledTextField
             {...params}
+            InputLabelProps={{
+              shrink: false,
+              style: { color: '#141414' },
+            }}
+            InputProps={{ ...params.InputProps, disableUnderline: true }}
             label={label}
             variant="standard"
           />
         )}
         onChange={(_, selectedFilterOptions) => onChange(selectedFilterOptions, filterName)}
       />
-      <Box sx={{ mb: 3 }}>
+      <Box sx={{ mb: 1 }}>
         {selectedOptions.map((option) => (
           <Box
             component="form"
@@ -67,7 +74,11 @@ const CheckboxFilter = ({
               },
             }}
           >
-            <div>{option.title}</div>
+            <Box>
+              <Typography sx={{ fontWeight: 300 }}>
+                {option.title}
+              </Typography>
+            </Box>
 
             <Button
               sx={{ color: '#141414' }}
@@ -83,4 +94,4 @@ const CheckboxFilter = ({
   );
 };
 
-export default CheckboxFilter;
+export default AutocompleteFilter;

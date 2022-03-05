@@ -4,14 +4,14 @@ import {
 } from '@mui/material';
 
 import { ProductContext } from './contexts/product-context';
-import CheckboxFilter from '../components/checkbox-filter';
+import AutocompleteFilter from '../components/autocomplete-filter';
 
 const ProductsPageFilters = () => {
   const { filters, handleFilterChange } = useContext(ProductContext);
 
   return (
     <Box>
-      <CheckboxFilter
+      <AutocompleteFilter
         filterOptions={filters.category}
         filterName="category"
         label="Kategorija"
@@ -21,7 +21,7 @@ const ProductsPageFilters = () => {
         )}
       />
 
-      <CheckboxFilter
+      <AutocompleteFilter
         filterOptions={filters.color}
         filterName="color"
         label="Spalva"
@@ -31,7 +31,7 @@ const ProductsPageFilters = () => {
         )}
       />
 
-      <CheckboxFilter
+      <AutocompleteFilter
         filterOptions={filters.size}
         filterName="size"
         label="Dydžiai"
@@ -41,7 +41,7 @@ const ProductsPageFilters = () => {
         )}
       />
 
-      <CheckboxFilter
+      <AutocompleteFilter
         filterOptions={filters.brand}
         filterName="brand"
         label="Gamintojas"

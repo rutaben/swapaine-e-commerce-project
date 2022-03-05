@@ -9,8 +9,7 @@ const theme = createTheme({
       default: '#fafafa',
     },
     primary: {
-      light: '#f2f2f2',
-      main: '#fafafa',
+      main: '#f2f2f2',
       contrastText: '#141414',
     },
     secondary: {
