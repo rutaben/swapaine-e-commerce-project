@@ -37,7 +37,7 @@ const ProductsPageFilterDrawerContainer = ({
           <IconButton
             onClick={closeDrawer}
             sx={(theme) => ({
-              minHeight: 0, minWidth: 0, padding: 0, color: theme.palette.secondary.light,
+              minHeight: 0, minWidth: 0, padding: 0, color: theme.palette.primary.contrastText,
             })}
           >
             <CloseIcon />

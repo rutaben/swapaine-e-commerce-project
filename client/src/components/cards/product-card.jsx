@@ -12,6 +12,13 @@ import { Link } from 'react-router-dom';
 const CardLink = styled(Link)(({ theme }) => ({
   textDecoration: 'none',
   color: theme.palette.primary.contrastText,
+  '&:hover': {
+    backgroundColor: '#141414',
+  },
+}));
+
+const StyledTypography = styled(Typography)(() => ({
+  fontWeight: 300,
 }));
 
 const ProductCard = ({
@@ -20,28 +27,34 @@ const ProductCard = ({
   <Card
     elevation={0}
     sx={{
-      maxWidth: 350, px: 1, py: 2, backgroundColor: '#fafafa',
+      maxWidth: 280, height: 550, px: '0.2rem', py: 2, backgroundColor: '#fafafa',
     }}
   >
     <CardActionArea>
       <CardLink to={`/products/${id}`}>
         <CardMedia
           component="img"
-          height="350"
+          height="400"
           image={productImage}
           alt="product"
         />
-        <CardContent>
-          <Typography variant="h5" component="div" sx={{ textTransform: 'uppercase' }}>
+        <CardContent sx={{ px: 0 }}>
+          <Typography
+            variant="h4"
+            sx={{
+              textTransform: 'uppercase', mb: 1, fontFamily: 'Cormorant Garamond', fontWeight: '700',
+            }}
+          >
             {brand}
           </Typography>
-          <Typography variant="body2" sx={{ mb: 2 }}>
+          <Typography variant="subtitle1" sx={{ mb: 1 }}>
             {name}
           </Typography>
-          <Typography variant="body2">
-            Vertė €
+          <StyledTypography variant="subtitle1">
+            Originali kaina €
             {price}
-          </Typography>
+            ,00
+          </StyledTypography>
         </CardContent>
       </CardLink>
     </CardActionArea>

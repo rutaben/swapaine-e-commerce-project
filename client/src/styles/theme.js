@@ -99,6 +99,10 @@ theme.typography.body2 = {
   fontSize: '1.05rem',
 };
 
+theme.typography.subtitle1 = {
+  fontSize: '0.85rem',
+};
+
 export const lightTheme = createTheme(theme, {
   mixins: {
     toolbar: {
