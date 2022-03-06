@@ -3,7 +3,8 @@ import {
   Drawer,
   IconButton,
   List,
-  Divider,
+  Typography,
+  Box,
   useTheme,
 } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -11,9 +12,6 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import PersonIcon from '@mui/icons-material/Person';
 import HistoryIcon from '@mui/icons-material/History';
 import ConstructionIcon from '@mui/icons-material/Construction';
-// import GroupIcon from '@mui/icons-material/Group';
-// import CategoryIcon from '@mui/icons-material/Category';
-// import LocationCityIcon from '@mui/icons-material/LocationCity';
 import { authSelector } from '../../../store/auth';
 import { useSelector } from '../../../store/hooks';
 import routes from '../../../routing/routes';
@@ -31,9 +29,6 @@ const navigationItems = {
   ],
   admin: [
     { title: 'Produktų panelė', path: routes.AdminDashboard, Icon: ConstructionIcon },
-    // { title: 'Vartotojų panelė', path: routes.UserPanelPage, Icon: GroupIcon },
-    // { title: 'Kategorijų panelė', path: routes.CategoryPanelPage, Icon: CategoryIcon },
-    // { title: 'Miestų panelė', path: routes.CityPanelPage, Icon: LocationCityIcon },
   ],
 };
 
@@ -53,6 +48,8 @@ const DashboardLayoutDrawer = ({
         '& .MuiDrawer-paper': {
           width: theme.mixins.drawer.width,
           boxSizing: 'border-box',
+          // backgroundColor: 'rgba(0, 0, 0, 0.0)',
+          // borderWidth: 0,
         },
       }}
       variant={isSmallScreen ? 'persistent' : 'permanent'}
@@ -61,9 +58,27 @@ const DashboardLayoutDrawer = ({
     >
       <DashboardLayoutDrawerHeader>
         {isSmallScreen && (
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-          </IconButton>
+          <Box sx={{
+            mx: 'auto', width: '90%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          }}
+          >
+            <Typography variant="h3" sx={{ fontFamily: 'Cormorant Garamond', fontWeight: 700 }}>Meniu</Typography>
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === 'ltr'
+                ? (
+                  <ChevronLeftIcon sx={() => ({
+                    color: theme.palette.primary.contrastText,
+                  })}
+                  />
+                )
+                : (
+                  <ChevronRightIcon sx={() => ({
+                    color: theme.palette.primary.contrastText,
+                  })}
+                  />
+                )}
+            </IconButton>
+          </Box>
         )}
       </DashboardLayoutDrawerHeader>
       <List>
@@ -75,7 +90,6 @@ const DashboardLayoutDrawer = ({
             Icon={Icon}
           />
         ))}
-        <Divider />
         {user?.role === 'ADMIN' && navigationItems.admin.map(({ path, title, Icon }) => (
           <DashboardLayoutDrawerLink
             key={path}

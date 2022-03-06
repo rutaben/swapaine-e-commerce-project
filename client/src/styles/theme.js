@@ -9,7 +9,8 @@ const theme = createTheme({
       default: '#fafafa',
     },
     primary: {
-      main: '#f2f2f2',
+      main: '#fafafa',
+      light: '#fafafa',
       contrastText: '#141414',
     },
     secondary: {
@@ -106,26 +107,20 @@ theme.typography.subtitle1 = {
 export const lightTheme = createTheme(theme, {
   mixins: {
     toolbar: {
-      height: 100,
+      height: 150,
     },
     footer: {
-      height: 100,
+      height: 150,
     },
     drawer: {
       width: 240,
     },
+    transitions: {
+      duration: {
+        slow: 600,
+      },
+    },
   },
 });
-
-// export const bodyTypography = createTheme(theme, {
-//   palette: {
-//     typography: {
-//       fontFamily: [
-//         'Open Sans',
-//         'sans-serif',
-//       ].join(','),
-//     },
-//   },
-// });
 
 export default theme;

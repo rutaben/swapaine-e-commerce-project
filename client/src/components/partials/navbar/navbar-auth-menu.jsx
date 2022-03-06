@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 import {
   Menu,
   MenuItem,
@@ -8,11 +8,14 @@ import {
   Typography,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { useSelector } from '../../../store/hooks';
+import { userSelector } from '../../../store/auth';
 import AuthService from '../../../services/auth-service';
 import routes from '../../../routing/routes';
 
 const NavbarAuthMenu = () => {
   const anchorRef = useRef();
+  const user = useSelector(userSelector);
   const [menuOpen, setMenuOpen] = useState(false);
   const handleOpenMenu = () => setMenuOpen(true);
   const handleCloseMenu = () => setMenuOpen(false);
@@ -20,11 +23,12 @@ const NavbarAuthMenu = () => {
     handleCloseMenu();
     AuthService.logout();
   };
+  const initials = useMemo(() => (user ? `${user.name[0]}${user.surname[0]}` : ''), [user]);
 
   return (
     <Box>
       <IconButton onClick={handleOpenMenu} ref={anchorRef}>
-        <Avatar>R</Avatar>
+        <Avatar>{initials}</Avatar>
       </IconButton>
       <Menu
         open={menuOpen}
