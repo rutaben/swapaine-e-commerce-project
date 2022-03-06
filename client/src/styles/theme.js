@@ -65,15 +65,15 @@ theme.typography.h2 = {
 };
 
 theme.typography.h3 = {
-  fontSize: '2rem',
+  fontSize: '1.75rem',
   '@media (min-width:600px)': {
-    fontSize: '2.25rem',
+    fontSize: '2rem',
   },
   '@media (min-width:900px)': {
-    fontSize: '2.5rem',
+    fontSize: '2.25rem',
   },
   [theme.breakpoints.up('lg')]: {
-    fontSize: '2.75rem',
+    fontSize: '2.5rem',
   },
 };
 

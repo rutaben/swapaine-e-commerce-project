@@ -2,32 +2,43 @@ import React from 'react';
 import {
   Box,
   Button,
+  Typography,
+  styled,
 } from '@mui/material';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import FilterListIcon from '@mui/icons-material/FilterList';
+
+const StyledButton = styled(Button)(({ theme }) => ({
+  position: 'fixed',
+  color: theme.palette.primary.contrastText,
+  [theme.breakpoints.down('md')]: {
+    display: 'flex',
+  },
+  [theme.breakpoints.up('md')]: {
+    display: 'none',
+  },
+}));
 
 const ProductsPageTopActions = ({ openDrawer }) => (
-
   <Box sx={{
-    minWidth: 120, display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 2,
+    minWidth: 120, display: 'flex', alignItems: 'center', justifyContent: 'flex-end',
   }}
   >
-    <Button
+    <StyledButton
       size="large"
       onClick={openDrawer}
-      sx={(theme) => ({
-        fontSize: theme.typography.body2,
-        color: theme.palette.primary.contrastText,
-        [theme.breakpoints.down('md')]: {
-          display: 'flex',
-        },
-        [theme.breakpoints.up('md')]: {
-          display: 'none',
-        },
-      })}
+      sx={{ my: 2 }}
     >
-      Filtrai
-      <ArrowDropDownIcon sx={{ color: 'gray' }} />
-    </Button>
+      <Typography
+        variant="h4"
+        sx={{
+          fontFamily: 'Cormorant Garamond',
+          fontWeight: 700,
+        }}
+      >
+        Filtrai
+      </Typography>
+      <FilterListIcon sx={(theme) => ({ color: theme.palette.primary.contrastText, ml: 1 })} />
+    </StyledButton>
   </Box>
 );
 
