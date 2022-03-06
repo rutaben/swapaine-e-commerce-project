@@ -9,6 +9,7 @@ import Icon1 from '../../assets/images/instructions-1.png';
 import Icon2 from '../../assets/images/instructions-2.png';
 import Icon3 from '../../assets/images/instructions-3.png';
 import FeatureCard from './components/cards/feature-card';
+import ContainedButtonDark from '../../components/buttons/contained-button-dark';
 
 const StyledContainer = styled(Grid)(() => ({
   display: 'flex',
@@ -45,7 +46,7 @@ const Instructions = () => (
     sx={(theme) => ({
       px: 15,
       mt: 5,
-      mb: 10,
+      mb: 15,
       [theme.breakpoints.down('md')]: {
         my: 0,
         px: 20,
@@ -67,12 +68,13 @@ const Instructions = () => (
       </StyledTypography>
     </Grid>
     {instructionsCardsData.map(({ title, body, image }) => (
-      <Grid item xs={12} md={4} key={title}>
+      <Grid item xs={12} md={4} key={title} sx={{ mb: 3 }}>
         <FeatureCard key={title} title={title} body={body}>
-          <Avatar variant="square" src={image} sx={{ width: '80px', height: '120px' }} />
+          <Avatar variant="square" src={image} sx={{ width: '60px', height: '90px', mb: 3 }} />
         </FeatureCard>
       </Grid>
     ))}
+    <ContainedButtonDark title="Žiūrėti katalogą" />
   </StyledContainer>
 );
 
