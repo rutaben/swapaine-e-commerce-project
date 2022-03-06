@@ -9,7 +9,7 @@ const imageContainerStyle = (theme) => ({
   '&.selectable': {
     ':hover': {
       cursor: 'pointer',
-      boxShadow: `0 0 0 2px ${theme.palette.primary.main}`,
+      boxShadow: `0 0 0 2px ${theme.palette.primary.light}`,
     },
   },
 });

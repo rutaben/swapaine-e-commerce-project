@@ -6,7 +6,7 @@ import {
 
 const StyledButton = styled(Button)(({ theme }) => ({
   letterSpacing: '1px',
-  color: theme.palette.primary.main,
+  color: theme.palette.primary.light,
   backgroundColor: theme.palette.primary.contrastText,
   borderColor: theme.palette.primary.contrastText,
   fontWeight: 700,
