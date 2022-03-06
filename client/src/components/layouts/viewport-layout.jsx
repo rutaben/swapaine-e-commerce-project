@@ -2,9 +2,8 @@ import React from 'react';
 import { Box, styled } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 
-const ViewportContainer = styled(Box)(() => ({
-  // height: `calc(100vh - ${theme.mixins.navbar.height}px)`,
-  height: '100vh',
+const ViewportContainer = styled(Box)(({ theme }) => ({
+  height: `calc(100vh - ${theme.mixins.footer.height}px )`,
   overflow: 'hidden',
   display: 'grid',
 }));

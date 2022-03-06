@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Container,
   Box,
-  // Typography,
+  Typography,
   CircularProgress,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
@@ -20,7 +20,7 @@ const AuthForm = ({
   <Container
     maxWidth="xs"
     component="main"
-    sx={{ pt: '7vh' }}
+    sx={(theme) => ({ pt: `${theme.mixins.toolbar.height}px` })}
   >
     <Box component="form" onSubmit={onSubmit}>
       <Box sx={{
@@ -30,9 +30,9 @@ const AuthForm = ({
         alignItems: 'center',
       }}
       >
-        {/* <Typography component="h1" variant="h5">
+        <Typography variant="h4">
           {title}
-        </Typography> */}
+        </Typography>
       </Box>
       {children}
       <Button disabled={!isValid}>
