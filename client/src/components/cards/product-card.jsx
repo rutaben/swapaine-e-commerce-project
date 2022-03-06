@@ -9,12 +9,26 @@ import {
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 
+const StyledCard = styled(Card)(() => ({
+  maxWidth: 280,
+  height: 550,
+  px: '0.2rem',
+  py: 2,
+  backgroundColor: '#fafafa',
+  '& .MuiTouchRipple-root': {
+    display: 'none',
+  },
+}));
+
+const StyledCardActionArea = styled(CardActionArea)(() => ({
+  '& .MuiCardActionArea-focusHighlight': {
+    display: 'none',
+  },
+}));
+
 const CardLink = styled(Link)(({ theme }) => ({
   textDecoration: 'none',
   color: theme.palette.primary.contrastText,
-  '&:hover': {
-    backgroundColor: '#141414',
-  },
 }));
 
 const StyledTypography = styled(Typography)(() => ({
@@ -24,14 +38,13 @@ const StyledTypography = styled(Typography)(() => ({
 const ProductCard = ({
   id, name, price, brand, productImage,
 }) => (
-  <Card
+  <StyledCard
     elevation={0}
-    sx={{
-      maxWidth: 280, height: 550, px: '0.2rem', py: 2, backgroundColor: '#fafafa',
-    }}
   >
-    <CardActionArea>
-      <CardLink to={`/products/${id}`}>
+    <StyledCardActionArea>
+      <CardLink
+        to={`/products/${id}`}
+      >
         <CardMedia
           component="img"
           height="400"
@@ -57,8 +70,8 @@ const ProductCard = ({
           </StyledTypography>
         </CardContent>
       </CardLink>
-    </CardActionArea>
-  </Card>
+    </StyledCardActionArea>
+  </StyledCard>
 );
 
 export default ProductCard;
