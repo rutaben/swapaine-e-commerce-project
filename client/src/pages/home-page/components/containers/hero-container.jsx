@@ -14,7 +14,7 @@ const StyledBox = styled(Box)(() => ({
 }));
 
 const StyledHeader = styled(Typography)(({ theme }) => ({
-  color: theme.palette.primary.main,
+  color: theme.palette.primary.light,
   fontWeight: 700,
   textTransform: 'uppercase',
   fontFamily: 'Cormorant Garamond',

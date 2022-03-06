@@ -8,7 +8,7 @@ import ButtonTypography from './button-typography';
 const StyledButton = styled(Button)(({ theme }) => ({
   borderRadius: 0,
   backgroundColor: theme.palette.secondary.main,
-  color: theme.palette.primary.main,
+  color: theme.palette.primary.light,
   '&:hover': {
     backgroundColor: theme.palette.secondary.light,
   },
