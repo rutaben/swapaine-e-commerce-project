@@ -10,7 +10,7 @@ const ProductsPageFilters = () => {
   const { filters, handleFilterChange } = useContext(ProductContext);
 
   return (
-    <Box>
+    <Box sx={{ pr: 1 }}>
       <AutocompleteFilter
         filterOptions={filters.category}
         filterName="category"

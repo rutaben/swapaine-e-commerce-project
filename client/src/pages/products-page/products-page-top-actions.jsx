@@ -8,7 +8,6 @@ import {
 import FilterListIcon from '@mui/icons-material/FilterList';
 
 const StyledButton = styled(Button)(({ theme }) => ({
-  position: 'fixed',
   color: theme.palette.primary.contrastText,
   [theme.breakpoints.down('md')]: {
     display: 'flex',
@@ -20,13 +19,12 @@ const StyledButton = styled(Button)(({ theme }) => ({
 
 const ProductsPageTopActions = ({ openDrawer }) => (
   <Box sx={{
-    minWidth: 120, display: 'flex', alignItems: 'center', justifyContent: 'flex-end',
+    minWidth: 120, display: 'flex', alignItems: 'center', mt: -1,
   }}
   >
     <StyledButton
       size="large"
       onClick={openDrawer}
-      sx={{ my: 2 }}
     >
       <Typography
         variant="h4"

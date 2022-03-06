@@ -29,11 +29,18 @@ const ProductsPage = () => {
   return (
     <ProductProvider>
       <Container>
-        <Grid container sx={(theme) => ({ mt: `calc(${theme.mixins.toolbar.height}px + 20px)` })}>
+        <Grid container sx={(theme) => ({ mt: `calc(${theme.mixins.toolbar.height}px + 25px)`, position: 'relative' })}>
           <StyledGrid item md={3}>
             <ProductsPageFilters />
           </StyledGrid>
-          <Grid item xs={12} md={9} sx={() => ({ display: 'flex', flexDirection: 'column' })}>
+          <Grid
+            item
+            xs={12}
+            md={9}
+            sx={() => ({
+              display: 'flex', flexDirection: 'column',
+            })}
+          >
             <ProductsPageTopActions openDrawer={createToggleDrawer(true)} />
             <ProductsPageFiltersDrawer
               openDrawer={openDrawer}
