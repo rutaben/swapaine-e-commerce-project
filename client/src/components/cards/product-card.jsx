@@ -5,15 +5,14 @@ import {
   CardMedia,
   Typography,
   CardActionArea,
+  Box,
   styled,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 const StyledCard = styled(Card)(() => ({
-  maxWidth: 280,
+  width: 280,
   height: 550,
-  px: '0.2rem',
-  py: 2,
   backgroundColor: '#fafafa',
   '& .MuiTouchRipple-root': {
     display: 'none',
@@ -40,6 +39,7 @@ const ProductCard = ({
 }) => (
   <StyledCard
     elevation={0}
+    sx={{ px: '0.2rem', py: 2 }}
   >
     <StyledCardActionArea>
       <CardLink
@@ -51,7 +51,7 @@ const ProductCard = ({
           image={productImage}
           alt="product"
         />
-        <CardContent sx={{ px: 0 }}>
+        <CardContent>
           <Typography
             variant="h4"
             sx={{
@@ -60,9 +60,11 @@ const ProductCard = ({
           >
             {brand}
           </Typography>
-          <Typography variant="subtitle1" sx={{ mb: 1 }}>
-            {name}
-          </Typography>
+          <Box sx={{ height: '2.15rem' }}>
+            <Typography variant="subtitle1" sx={{ mb: 1, lineHeight: 1.25 }}>
+              {name}
+            </Typography>
+          </Box>
           <StyledTypography variant="subtitle1">
             Originali kaina €
             {price}
