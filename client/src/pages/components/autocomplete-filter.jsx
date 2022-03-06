@@ -36,7 +36,7 @@ const AutocompleteFilter = ({
         options={filterOptions}
         getOptionLabel={(option) => option.title}
         filterName={filterName}
-        style={{ width: '90%', marginBottom: 10 }}
+        style={{ width: '100%', marginBottom: 10 }}
         renderTags={() => null}
         isOptionEqualToValue={(option, value) => option.id === value.id}
         renderOption={(props, option) => (

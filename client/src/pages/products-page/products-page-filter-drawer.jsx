@@ -4,10 +4,19 @@ import {
   IconButton,
   Typography,
   Drawer,
+  styled,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import ProductsPageFilters from './products-page-filters';
 
-const CarSearchPageDrawer = ({
+const StyledTypography = styled(Typography)(() => ({
+  display: 'flex',
+  justifyContent: 'space-between',
+  fontFamily: 'Cormorant Garamond',
+  fontWeight: 700,
+}));
+
+const ProductsPageFilterDrawerContainer = ({
   openDrawer, closeDrawer,
 }) => (
   <Drawer
@@ -16,23 +25,31 @@ const CarSearchPageDrawer = ({
   >
     <Box
       sx={{
-        width: 270, display: 'flex', flexDirection: 'column', gap: '10px',
+        width: '350px', display: 'flex', flexDirection: 'column', mt: 5,
       }}
     >
-      <Typography
-        component="h2"
-        variant="h5"
-        sx={{
-          display: 'flex', justifyContent: 'space-between', ml: '15px',
-        }}
-      >
-        Filtrai
-        <IconButton onClick={closeDrawer}>
-          <CloseIcon fontSize="large" />
-        </IconButton>
-      </Typography>
+      <Box sx={{ width: '80%', mx: 'auto' }}>
+        <StyledTypography
+          variant="h3"
+          sx={{ mb: 3 }}
+        >
+          Filtrai
+          <IconButton
+            onClick={closeDrawer}
+            sx={(theme) => ({
+              minHeight: 0, minWidth: 0, padding: 0, color: theme.palette.secondary.light,
+            })}
+          >
+            <CloseIcon />
+          </IconButton>
+        </StyledTypography>
+      </Box>
+      <Box sx={{ width: '80%', mx: 'auto' }}>
+        <ProductsPageFilters />
+      </Box>
     </Box>
+
   </Drawer>
 );
 
-export default CarSearchPageDrawer;
+export default ProductsPageFilterDrawerContainer;
