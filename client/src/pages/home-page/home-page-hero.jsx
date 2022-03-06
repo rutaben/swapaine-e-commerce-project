@@ -21,19 +21,22 @@ const Hero = () => {
           src="https://res.cloudinary.com/rutaben/image/upload/v1646480745/pexels-photo-6467614_fvokod.jpg"
           alt=""
           style={{
-            height: '100vh', width: '100vw', objectFit: 'cover', objectPosition: 'right',
+            height: '100vh', width: '100vw', objectFit: 'cover', objectPosition: 'top',
           }}
         />
       </HeroContainer>
     );
   }
   return (
-    <HeroContainer>
+    <HeroContainer
+      heroText="Moderni spinta"
+      title="Žiūrėti"
+    >
       <img
-        src="https://res.cloudinary.com/rutaben/image/upload/v1646479202/image_969c12e2-6a37-4414-8970-6a80346347c0_va4tph.jpg"
+        src="https://res.cloudinary.com/rutaben/image/upload/v1646479113/image_7dd3e8cb-6bed-439e-920d-38c1b62c625c_bodmaw.jpg"
         alt=""
         style={{
-          height: '100vh', width: '100vw', objectFit: 'cover', objectPosition: 'center',
+          height: '100vh', width: '100vw', objectFit: 'cover', objectPosition: 'top',
         }}
       />
     </HeroContainer>
