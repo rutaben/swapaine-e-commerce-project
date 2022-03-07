@@ -10,58 +10,46 @@ An e-commerce (subscribtion) service web application (React & Node.js).
 * CRUD operations using forms (Formik library).
 * Schema-based form-level validation (Yup).
 
-## Getting Started
+# Getting Started
 
-### Dependencies
+## Dependencies
 
 * Node.js version 16 or greater
 
-### Installing and executing program
+## Installing and executing program
 
-# Client
+## Client
 
-## Navigate to client side: 
+### Navigate to client side: 
 ```
 $ cd client
 ```
-
-## Install libraries:
+### Install libraries:
 ```
 $ npm i
 ```
-
-## Run app:
+### Run app:
 ```
 $ npm start
 ```
+## Server
 
-# Server
-
-## Declare environment variables
+### Declare environment variables
 
 * create '.env' file
 * copy variables from '.env-example' and declare them in '.env'
 
-## Navigate to server side: 
+### Navigate to server side: 
 ```
 $ cd server
 ```
-
-## Install libraries:
+### Install libraries:
 ```
 $ npm i
 ```
-
-## Run server:
+### Run server:
 ```
 $ npm start
-```
-
-## Help
-
-Any advise for common problems or issues.
-```
-command to run if program contains helper info
 ```
 
 ## Authors
