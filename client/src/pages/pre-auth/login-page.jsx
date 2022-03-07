@@ -17,10 +17,10 @@ import AuthService from '../../services/auth-service';
 const StyledTextField = styled(TextField)(({ theme }) => ({
   color: theme.palette.primary.contrastText,
   border: theme.palette.primary.contrastText,
-  '&:hover': {
-    border: theme.palette.primary.contrastText,
+  '& fieldset': {
+    borderRadius: 0,
   },
-  '&label.Mui-focused': {
+  '&:hover': {
     border: theme.palette.primary.contrastText,
   },
 }));
@@ -89,7 +89,7 @@ const LoginPage = () => {
       <Alert severity="error" sx={{ my: 2, visibility: error ? 'visible' : 'hidden' }}>
         {error}
       </Alert>
-      <Grid container spacing={4}>
+      <Grid container spacing={4} sx={{ mt: -11 }}>
         <Grid item xs={12}>
           <StyledTextField
             name="email"

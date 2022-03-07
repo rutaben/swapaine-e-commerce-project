@@ -9,7 +9,14 @@ const FormButton = ({ children, ...rest }) => (
     fullWidth
     variant="contained"
     color="primary"
-    sx={{ height: 56, mb: 1, mt: 4 }}
+    sx={(theme) => ({
+      height: 56,
+      mb: 1,
+      mt: 4,
+      borderRadius: 0,
+      color: theme.palette.secondary.contrastText,
+      backgroundColor: theme.palette.secondary.main,
+    })}
     {...rest}
   >
     {children}

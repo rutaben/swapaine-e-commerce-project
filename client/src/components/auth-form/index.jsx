@@ -4,9 +4,15 @@ import {
   Box,
   Typography,
   CircularProgress,
+  styled,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import Button from './auth-form-button';
+
+const StyledLink = styled(Link)(({ theme }) => ({
+  textDecoration: 'none',
+  color: theme.palette.primary.main,
+}));
 
 const AuthForm = ({
   children,
@@ -23,12 +29,13 @@ const AuthForm = ({
     sx={(theme) => ({ pt: `${theme.mixins.toolbar.height}px` })}
   >
     <Box component="form" onSubmit={onSubmit}>
-      <Box sx={{
-        mb: 3,
+      <Box sx={() => ({
+        mt: 4,
+        mb: 5,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-      }}
+      })}
       >
         <Typography variant="h4">
           {title}
@@ -42,9 +49,9 @@ const AuthForm = ({
           : title
         }
       </Button>
-      <Link to={linkTo}>
+      <StyledLink to={linkTo}>
         {linkTitle}
-      </Link>
+      </StyledLink>
     </Box>
   </Container>
 );
