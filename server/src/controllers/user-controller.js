@@ -23,7 +23,7 @@ const updateUser = async (req, res) => {
     { email: req.user.email },
     props,
     { new: false }
-  ).populate('mainImg');
+  )
 
   res.status(200).json({
     message: 'Vartotojas atnaujintas',
@@ -31,32 +31,8 @@ const updateUser = async (req, res) => {
   })
 }
 
-const updateUserMainImage = async (req, res) => {
-  const { mainImg } = req.params;
-  const { email } = req.user;
-  try {
-    const userDoc = await UserModel.findOneAndUpdate(
-      { email },
-      { mainImg },
-      {
-        new: true,
-        runValidators: true,
-      },
-    ).populate('mainImg');
-
-    res.status(200).send({
-      message: 'Picture has been deleted',
-      user: new UserViewModel(userDoc),
-    });
-  } catch ({ message }) {
-    res.status(404).send({
-      message,
-    });
-  }
-}
 
 module.exports = {
   getUsers,
   updateUser,
-  updateUserMainImage,
 } 

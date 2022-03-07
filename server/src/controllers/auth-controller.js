@@ -36,7 +36,6 @@ const login = async (req, res) => {
   const { email, password } = req.body;
   try {
     const userDoc = await UserModel.findOne({ email })
-      .populate('mainImg')
     const passwordsAreEqual = await comparePasswordsAsync(password, userDoc.password);
     if (passwordsAreEqual) {
       const user = new UserViewModel(userDoc);
@@ -59,7 +58,6 @@ const auth = async (req, res) => {
   try {
     const { email } = jwt.verify(token, process.env.TOKEN_SECRET);
     const userDoc = await (await UserModel.findOne({ email }))
-      .populate('mainImg');
     const user = new UserViewModel(userDoc);
     res.status(200).json(user);
   } catch (error) {
