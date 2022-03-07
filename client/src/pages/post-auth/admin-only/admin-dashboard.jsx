@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useFormik } from 'formik';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 import {
   Typography,
   Button,
@@ -8,8 +10,10 @@ import {
   TextField,
   Container,
   MenuItem,
+  IconButton,
 } from '@mui/material';
 import ApiService from '../../../services/api-service';
+import ProductImageService from '../../../services/image-service';
 
 const defaultOption = {
   id: '-1',
@@ -35,12 +39,39 @@ const initialProps = {
 
 const AdminDashboard = () => {
   const [props, setProps] = useState(initialProps);
+  const [img, setImg] = useState(initialValues.images);
+
+  const fileUploadRef = useRef(null);
+
+  const handleUploadFiles = () => {
+    fileUploadRef.current.click();
+  };
+
+  const addToImgArr = (newData) => {
+    setImg([...img, newData]);
+  };
+
+  const handleImagesLoaded = async () => {
+    const input = fileUploadRef.current;
+    console.log(input.files[0]);
+    const data = await ProductImageService.uploadImages(input.files[0]);
+    console.log(data);
+    addToImgArr(data);
+  };
+
+  const handleError = () => alert('Pasiekėte didžiausią leistiną nuotraukų kiekį.');
+
+  const handleImageDelete = async (id) => {
+    await ProductImageService.deleteImage(id);
+    setImg(img.filter((x) => x.id !== id));
+  };
 
   const onSubmit = (values) => {
     const formattedData = {
       ...values,
     };
-    console.log(formattedData);
+    console.log('Suformuoti user duomenys', formattedData);
+
     // {category: '6202ca802ee32bcfba828e61',
     // brand: '6202b15d87dac037fdce5ff0',
     // name: 'Maskovskij',
@@ -82,7 +113,6 @@ const AdminDashboard = () => {
   const {
     values,
     handleChange,
-    // setFieldValue,
     handleSubmit,
   } = useFormik({
     initialValues,
@@ -216,13 +246,47 @@ const AdminDashboard = () => {
             <Button
               variant="outlined"
               sx={{ px: 3 }}
+              onClick={img.length < 4 ? handleUploadFiles : handleError}
             >
               Įkelti nuotraukas
             </Button>
+            <input
+              type="file"
+              hidden
+              ref={fileUploadRef}
+              accept=".jpg, .jpeg, .png"
+              onChange={handleImagesLoaded}
+            />
 
           </Grid>
 
+          <Grid item xs={6}>
+            <Typography>Nuotraukos</Typography>
+            <Box>
+              {
+      img.map(({ id, src }) => (
+        <Box
+          key={id}
+        >
+          <img
+            src={src}
+            alt={src}
+            width="100px"
+          />
+          <IconButton
+            color="error"
+            onClick={() => handleImageDelete(id)}
+          >
+            <DeleteIcon sx={{ fontSize: 35 }} />
+          </IconButton>
+        </Box>
+      ))
+    }
+            </Box>
+          </Grid>
+
         </Grid>
+
         <Box sx={{
           mt: 5, display: 'flex', justifyContent: 'center',
         }}
