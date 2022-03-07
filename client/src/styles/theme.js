@@ -107,7 +107,7 @@ theme.typography.subtitle1 = {
 export const lightTheme = createTheme(theme, {
   mixins: {
     toolbar: {
-      height: 150,
+      height: 100,
     },
     footer: {
       height: 150,
