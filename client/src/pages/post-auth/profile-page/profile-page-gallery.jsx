@@ -16,6 +16,7 @@ const ProfilePageGallery = ({ imgData, updateImgData, handleImageDelete }) => {
 
   const handleImagesLoaded = async () => {
     const input = fileUploadRef.current;
+    console.log(input);
     const data = await ProfileService.uploadImages(input.files);
     updateImgData(data);
   };
