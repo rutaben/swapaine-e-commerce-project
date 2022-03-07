@@ -6,7 +6,6 @@ const cors = require('cors');
 
 const authRouter = require('./routes/auth-router');
 const userRouter = require('./routes/user-router.js');
-const imageRouter = require('./routes/image-router');
 const productImageRouter = require('./routes/product-image-router');
 
 const productRouter = require('./routes/product-router');
@@ -20,7 +19,6 @@ const {
   SERVER_DOMAIN,
   SERVER_PORT,
   DB_CONNECTION,
-  PUBLIC_PATH,
 } = process.env;
 
 const corsOptions = {
@@ -31,13 +29,11 @@ const corsOptions = {
 // Middlewares
 server.use(morgan('tiny'));
 server.use(cors(corsOptions));
-server.use(express.static(PUBLIC_PATH));
 server.use(express.json());
 
 // Response handlers
 server.use('/api/auth', authRouter);
 server.use('/api/users', userRouter);
-server.use('/api/images', imageRouter);
 server.use('/api/product-images', productImageRouter);
 
 server.use('/api/products', productRouter);

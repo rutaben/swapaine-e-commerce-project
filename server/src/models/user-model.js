@@ -31,12 +31,6 @@ const userSchema = new Schema({
       { validator: (value) => /^.*[A-ZĄČĘĖĮŠŲŪŽ].*$/.test(value), message: 'At least one capital letter' },
     ]
   },
-  //repeatPassword čia nekuriame, nes mes jo niekur nesiųsime, jį reikia patikrinti iš karto
-  mainImg: {
-    type: Schema.Types.ObjectId,
-    ref: 'Image',
-    unique: true,
-  },
   role: {
     type: 'string',
     enum: ['USER', 'ADMIN'],
