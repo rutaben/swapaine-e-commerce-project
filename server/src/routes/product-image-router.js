@@ -2,7 +2,7 @@ const express = require('express');
 const {
     getProductImages,
     uploadProductImage,
-    // deleteProductImage
+    deleteProductImage
 } = require('../controllers/product-image-controller');
 const uploadOne = require('../middlewares/image-upload-middleware');
 
@@ -12,7 +12,7 @@ router.get('/', getProductImages);
 
 router.post('/', uploadOne, uploadProductImage);
 
-// router.delete('/:id', deleteProductImage);
+router.delete('/:id', deleteProductImage);
 
 module.exports = router;
 

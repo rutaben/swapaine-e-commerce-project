@@ -1,6 +1,5 @@
 const ProductImageModel = require('../models/product-image-model');
 const ProductImageViewModel = require('../view-models/product-image-view-model');
-// const { deleteFile } = require('../helpers/file-helpers');
 
 const getProductImages = async (req, res) => {
   const productImageDocs = await ProductImageModel.find();
@@ -24,29 +23,27 @@ const uploadProductImage = async (req, res) => {
   }
 }
 
-// const deleteProductImage = async (req, res) => {
-//   const { id } = req.params;
-//   try {
-//     const productImageDoc = await ProductImageModel.findById(id);
+const deleteProductImage = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const productImageDoc = await ProductImageModel.findById(id);
 
-//* čia įgalinsiu trynimą (reikia pasirašyti script'ą, kuris ištrauktų public_id kiekvenai nuotraukai,
-//* pagal kuriuos galėsiu trinti ir atnaujinti nuotraukas)
+    // vėliau čia įgalinsiu trynimą iš cloud'o (reikia pasirašyti script'ą, kuris ištrauktų public_id kiekvenai nuotraukai,
+    // pagal kuriuos galėsiu trinti ir atnaujinti nuotraukas)
 
-//     res.status(200).send({
-//       message: 'Picture has been deleted',
-//       id,
-//     });
-
-
-//   } catch (error) {
-//     res.status(404).send({
-//       message: 'Cannot find a picture',
-//     })
-//   }
-// }
+    res.status(200).send({
+      message: 'Picture has been deleted',
+      id,
+    });
+  } catch (error) {
+    res.status(404).send({
+      message: 'Cannot find a picture',
+    })
+  }
+}
 
 module.exports = {
   getProductImages,
   uploadProductImage,
-  // deleteProductImage,
+  deleteProductImage,
 };
