@@ -19,6 +19,9 @@ import { login } from '../../store/auth';
 const StyledTextField = styled(TextField)(({ theme }) => ({
   color: theme.palette.secondary.main,
   border: theme.palette.secondary.main,
+  '& fieldset': {
+    borderRadius: 0,
+  },
   '&:hover': {
     border: theme.palette.primary.contrastText,
   },

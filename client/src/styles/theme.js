@@ -21,10 +21,6 @@ const theme = createTheme({
     error: {
       main: '#bf4c4c',
     },
-    coloredButton: {
-      main: '#f7ea49',
-      dark: '#141414',
-    },
   },
   typography: {
     fontFamily: [
