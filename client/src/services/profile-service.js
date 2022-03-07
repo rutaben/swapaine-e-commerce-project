@@ -29,66 +29,6 @@ const ProfileService = new (class ProfileService {
     });
     store.dispatch(updateUser({ user: data.user }));
   }
-
-  async getUserImages() {
-    const token = ProfileService.validateToken();
-
-    const { data } = await this.requester.get('/images/', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return data.images;
-  }
-
-  async uploadImages(files) {
-    const token = ProfileService.validateToken();
-
-    const formData = new FormData();
-
-    //* jei kelsime daug nuotrauku
-    for (let i = 0; i < files.length; i += 1) {
-      formData.append('files', files[i]);
-    }
-    // //* jei kelsime viena nuotrauka
-    // formData.append('image', files[0]);
-
-    const { data } = await this.requester.post('/images/', formData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-
-        //* sita tipa irasome tuo atveju, jei bus postinama daug nuotrauku
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-
-    return data.images;
-  }
-
-  async deleteImage(id) {
-    const token = ProfileService.validateToken();
-
-    await this.requester.delete(`images/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-  }
-
-  async setMainImage(id) {
-    const token = ProfileService.validateToken();
-
-    const { data } = await this.requester.patch(`users/mainImg/${id}`, null, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-
-    store.dispatch(updateUser({ user: data.user }));
-    return true;
-  }
 })();
 
 export default ProfileService;
