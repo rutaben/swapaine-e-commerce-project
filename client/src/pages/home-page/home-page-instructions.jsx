@@ -5,10 +5,12 @@ import {
   Grid,
   styled,
 } from '@mui/material';
+import { Link } from 'react-router-dom';
 import Icon1 from '../../assets/images/instructions-1.png';
 import Icon2 from '../../assets/images/instructions-2.png';
 import Icon3 from '../../assets/images/instructions-3.png';
 import FeatureCard from './components/cards/feature-card';
+import routes from '../../routing/routes';
 import ContainedButtonDark from '../../components/buttons/contained-button-dark';
 
 const StyledContainer = styled(Grid)(() => ({
@@ -20,6 +22,11 @@ const StyledTypography = styled(Typography)(() => ({
   fontFamily: 'Cormorant Garamond',
   textTransform: 'uppercase',
   fontWeight: 700,
+}));
+
+const StyledLink = styled(Link)(({ theme }) => ({
+  textDecoration: 'none',
+  color: theme.palette.primary.main,
 }));
 
 const instructionsCardsData = [
@@ -74,7 +81,9 @@ const Instructions = () => (
         </FeatureCard>
       </Grid>
     ))}
-    <ContainedButtonDark title="Žiūrėti katalogą" />
+    <StyledLink to={routes.ProductsPage}>
+      <ContainedButtonDark title="Žiūrėti katalogą" />
+    </StyledLink>
   </StyledContainer>
 );
 
