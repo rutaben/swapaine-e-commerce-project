@@ -110,7 +110,6 @@ const ProductProvider = ({ children }) => {
   };
 
   const handleFilterChange = (selectedOption, filterName) => {
-    console.log({ selectedOption, filterName });
     const newFilter = [...filters[filterName]];
     const foundSelectedOption = newFilter.find((x) => x.id === selectedOption.id);
     if (!foundSelectedOption.selected) {

@@ -14,9 +14,10 @@ const StyledButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-const ContainedButtonDark = ({ title }) => (
+const ContainedButtonDark = ({ type, title }) => (
   <StyledButton
     variant="contained"
+    type={type}
     disableElevation
     sx={{
       px: 7,

@@ -11,8 +11,10 @@ import {
   MenuItem,
   IconButton,
 } from '@mui/material';
+// import ProductService from '../../../services/product-service';
 import ApiService from '../../../services/api-service';
 import ProductImageService from '../../../services/image-service';
+import ContainedButtonDark from '../../../components/buttons/contained-button-dark';
 
 const defaultOption = {
   id: '-1',
@@ -20,13 +22,13 @@ const defaultOption = {
 };
 
 const initialValues = {
-  category: defaultOption.id,
-  brand: defaultOption.id,
   name: '',
   price: 0,
+  category: defaultOption.id,
   size: defaultOption.id,
   color: defaultOption.id,
-  images: [],
+  brand: defaultOption.id,
+  productImages: [],
 };
 
 const initialProps = {
@@ -38,7 +40,7 @@ const initialProps = {
 
 const AdminDashboard = () => {
   const [props, setProps] = useState(initialProps);
-  const [img, setImg] = useState(initialValues.images);
+  const [imgArr, setImgArr] = useState(initialValues.productImages);
 
   const fileUploadRef = useRef(null);
 
@@ -47,14 +49,12 @@ const AdminDashboard = () => {
   };
 
   const addToImgArr = (newData) => {
-    setImg([...img, newData]);
+    setImgArr([...imgArr, newData]);
   };
 
   const handleImagesLoaded = async () => {
     const input = fileUploadRef.current;
-    console.log(input.files[0]);
     const data = await ProductImageService.uploadImages(input.files[0]);
-    console.log(data);
     addToImgArr(data);
   };
 
@@ -62,21 +62,23 @@ const AdminDashboard = () => {
 
   const handleImageDelete = async (id) => {
     await ProductImageService.deleteImage(id);
-    setImg(img.filter((x) => x.id !== id));
+    setImgArr(imgArr.filter((x) => x.id !== id));
   };
+
+  // const throwAlert = () => alert('Produktas sukurtas');
+
+  // const createNewProduct = async (formattedData) => {
+  //   const data = await ProductService.createProduct(formattedData);
+  //   throwAlert();
+  // };
 
   const onSubmit = (values) => {
     const formattedData = {
       ...values,
+      productImages: [...imgArr],
     };
     console.log('Suformuoti user duomenys', formattedData);
-
-    // {category: '6202ca802ee32bcfba828e61',
-    // brand: '6202b15d87dac037fdce5ff0',
-    // name: 'Maskovskij',
-    // price: 7,
-    // size: '6202bcf3a34e4e38fd0008c5',
-    // …}
+    // createNewProduct(formattedData);
   };
 
   const filtersArrToObj = ([
@@ -115,7 +117,6 @@ const AdminDashboard = () => {
     handleSubmit,
   } = useFormik({
     initialValues,
-    // validationSchema,
     onSubmit,
   });
 
@@ -124,27 +125,43 @@ const AdminDashboard = () => {
       maxWidth="sm"
       component="form"
       onSubmit={handleSubmit}
-      sx={{
-        // display: 'flex',
-        mt: 2,
-        mx: 4,
-        // flexDirection: 'column',
-      }}
+      sx={{ mt: 2, mx: 4 }}
     >
-      <Typography variant="h4">Įkelti prekę</Typography>
+      <Typography variant="h4" sx={{ mt: 2, mb: 5 }}>Įkelti prekę</Typography>
       <Grid container spacing={3}>
-        <Grid item xs={12}>
 
+        <Grid item xs={12}>
+          <TextField
+            name="name"
+            label="Pavadinimas"
+            onChange={handleChange}
+            value={values.name}
+            fullWidth
+            variant="outlined"
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <TextField
+            name="price"
+            label="Produkto vertė"
+            type="number"
+            onChange={handleChange}
+            value={values.price}
+            fullWidth
+            variant="outlined"
+          />
+        </Grid>
+
+        <Grid item xs={12}>
           <TextField
             select
             name="category"
             label="Kategorija"
             onChange={handleChange}
             value={values.category}
-              // error={touched. && Boolean(errors.)}
             fullWidth
             variant="outlined"
-            size="small"
           >
             {props.category.map((option, index) => (
               <MenuItem key={option.id} value={option.id} disabled={index === 0}>
@@ -157,61 +174,12 @@ const AdminDashboard = () => {
         <Grid item xs={12}>
           <TextField
             select
-            name="brand"
-            label="Gamintojas"
-            onChange={handleChange}
-            value={values.brand}
-              // error={touched. && Boolean(errors.)}
-            fullWidth
-            variant="outlined"
-            size="small"
-          >
-            {props.brand.map((option) => (
-              <MenuItem key={option.id} value={option.id}>
-                {option.title}
-              </MenuItem>
-            ))}
-          </TextField>
-        </Grid>
-
-        <Grid item xs={12}>
-          <TextField
-            name="name"
-            label="Pavadinimas"
-            onChange={handleChange}
-            value={values.name}
-              // error={touched.name && Boolean(errors.name)}
-            fullWidth
-            variant="outlined"
-            size="small"
-          />
-        </Grid>
-
-        <Grid item xs={12}>
-          <TextField
-            name="price"
-            label="Produkto vertė"
-            type="number"
-            onChange={handleChange}
-            value={values.price}
-              // error={touched.price && Boolean(errors.price)}
-            fullWidth
-            variant="outlined"
-            size="small"
-          />
-        </Grid>
-
-        <Grid item xs={12}>
-          <TextField
-            select
             name="size"
             label="Dydis"
             onChange={handleChange}
             value={values.size}
-            // error={touched.surname && Boolean(errors.surname)}
             fullWidth
             variant="outlined"
-            size="small"
           >
             {props.size.map((option) => (
               <MenuItem key={option.id} value={option.id}>
@@ -228,10 +196,8 @@ const AdminDashboard = () => {
             label="Spalva"
             onChange={handleChange}
             value={values.color}
-              // error={touched. && Boolean(errors.)}
             fullWidth
             variant="outlined"
-            size="small"
           >
             {props.color.map((option) => (
               <MenuItem key={option.id} value={option.id}>
@@ -241,29 +207,57 @@ const AdminDashboard = () => {
           </TextField>
         </Grid>
 
-        <Grid item xs={6}>
-          <Button
+        <Grid item xs={12}>
+          <TextField
+            select
+            name="brand"
+            label="Gamintojas"
+            onChange={handleChange}
+            value={values.brand}
+            fullWidth
+            variant="outlined"
+          >
+            {props.brand.map((option) => (
+              <MenuItem key={option.id} value={option.id}>
+                {option.title}
+              </MenuItem>
+            ))}
+          </TextField>
+        </Grid>
+
+        <Grid item xs={12}>
+          <ContainedButtonDark
+            title="Įkelti nuotrauką"
             variant="outlined"
             sx={{ px: 3 }}
-            onClick={img.length < 4 ? handleUploadFiles : handleError}
-          >
-            Įkelti nuotraukas
-          </Button>
+            onClick={imgArr.length < 4 ? handleUploadFiles : handleError}
+          />
           <input
             type="file"
             hidden
             ref={fileUploadRef}
             accept=".jpg, .jpeg, .png"
+            value={values.productImages}
             onChange={handleImagesLoaded}
           />
+          <Button
+            type="submit"
+            sx={{
+              px: 7,
+              py: 2,
+              mt: 2,
+              ml: 3,
+            }}
+          >
+            Sukurti prekę
+          </Button>
 
         </Grid>
 
-        <Grid item xs={6}>
-          <Typography>Nuotraukos</Typography>
-          <Box>
+        <Grid item xs={12}>
+          <Box sx={{ display: 'flex' }}>
             {
-      img.map(({ id, src }) => (
+      imgArr.map(({ id, src }) => (
         <Box
           key={id}
         >
@@ -271,6 +265,7 @@ const AdminDashboard = () => {
             src={src}
             alt={src}
             width="100px"
+            height="100px"
           />
           <IconButton
             color="error"
@@ -285,19 +280,6 @@ const AdminDashboard = () => {
         </Grid>
 
       </Grid>
-
-      <Box sx={{
-        mt: 5, display: 'flex', justifyContent: 'center',
-      }}
-      >
-        <Button
-          variant="outlined"
-          type="submit"
-          sx={{ px: 3 }}
-        >
-          Sukurti prekę
-        </Button>
-      </Box>
     </Box>
   );
 };
