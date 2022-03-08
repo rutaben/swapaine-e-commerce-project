@@ -8,7 +8,6 @@ export const UserContext = createContext();
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState([]);
   const { id } = '61ee9dd154b537f5470f3da0';
-  console.log(user);
 
   useEffect(() => {
     (async () => {

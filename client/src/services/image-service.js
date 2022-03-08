@@ -19,7 +19,6 @@ const ProductImageService = new (class ProductImageService {
   }
 
   async uploadImages(image) {
-    console.log(image);
     const token = ProductImageService.validateToken();
 
     const formData = new FormData();
@@ -39,7 +38,6 @@ const ProductImageService = new (class ProductImageService {
   }
 
   async deleteImage(id) {
-    console.log(id);
     const token = ProductImageService.validateToken();
 
     await this.requester.delete(`product-images/${id}`, {
