@@ -19,9 +19,9 @@ const ProductPage = () => {
       const productProps = [
         { value: Object.values(getProduct?.brand)[1], variant: 'h4' },
         { value: getProduct?.name, variant: 'body1' },
-        { value: `€${getProduct?.price}`, name: 'Vertė: ', variant: 'body1' },
-        { value: Object.values(getProduct?.size)[1], name: 'Dydis:', variant: 'body1' },
-        { value: Object.values(getProduct?.color)[1], name: 'Spalva:', variant: 'body1' },
+        { value: `€${getProduct?.price}`, name: 'Vertė: ', variant: 'body2' },
+        { value: Object.values(getProduct?.size)[1], name: 'Dydis:', variant: 'body2' },
+        { value: Object.values(getProduct?.color)[1], name: 'Spalva:', variant: 'body2' },
       ];
       setProduct(productProps);
     })();
@@ -36,8 +36,8 @@ const ProductPage = () => {
   }, []);
 
   return (
-    <Container sx={(theme) => ({ mt: `calc(${theme.mixins.toolbar.height}px + 30px)`, mb: 5 })}>
-      <Grid container>
+    <Container sx={(theme) => ({ mt: `calc(${theme.mixins.toolbar.height}px + 30px)`, mb: 10 })}>
+      <Grid container sx={{ display: 'flex' }}>
         <Grid item xs={12} sm={8}>
           <ProductPageImages productImgs={productImgs} />
         </Grid>
