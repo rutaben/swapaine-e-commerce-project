@@ -4,17 +4,15 @@ import {
   CardActions,
   CardContent,
 } from '@mui/material';
-import BlackButton from '../../pages/home-page/components/buttons/black-button';
+import ContainedButtonDark from '../buttons/contained-button-dark';
 
-const InfoCard = ({
-  buttonText, children,
-}) => (
+const InfoCard = ({ children }) => (
   <Card elevation={0} sx={(theme) => ({ backgroundColor: theme.palette.background.default })}>
     <CardContent>
       {children}
     </CardContent>
     <CardActions>
-      <BlackButton title={buttonText} type="submit" />
+      <ContainedButtonDark title="Į mėgstamus" type="submit" />
     </CardActions>
   </Card>
 );

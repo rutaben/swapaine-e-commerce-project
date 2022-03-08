@@ -5,7 +5,7 @@ import {
 import InfoCard from '../../components/cards/info-card';
 
 const ProductPageInfo = ({ product }) => (
-  <InfoCard buttonText="Išsaugoti" onSubmit>
+  <InfoCard onSubmit>
     {product.map(({ value, name, variant }) => (
       <Typography variant={variant} gutterBottom>
         {name}
