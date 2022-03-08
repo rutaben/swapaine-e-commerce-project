@@ -8,7 +8,6 @@ import {
   Box,
   Grid,
   TextField,
-  Container,
   MenuItem,
   IconButton,
 } from '@mui/material';
@@ -121,149 +120,149 @@ const AdminDashboard = () => {
   });
 
   return (
-    <Container maxWidth="sm">
-      <Box
-        component="form"
-        onSubmit={handleSubmit}
-        sx={{
-          display: 'flex',
-          gap: 3,
-          px: 3,
-          flexDirection: 'column',
-        }}
-      >
-        <Typography variant="h4">Įkelti prekę</Typography>
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
+    <Box
+      maxWidth="sm"
+      component="form"
+      onSubmit={handleSubmit}
+      sx={{
+        // display: 'flex',
+        mt: 2,
+        mx: 4,
+        // flexDirection: 'column',
+      }}
+    >
+      <Typography variant="h4">Įkelti prekę</Typography>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
 
-            <TextField
-              select
-              name="category"
-              label="Kategorija"
-              onChange={handleChange}
-              value={values.category}
+          <TextField
+            select
+            name="category"
+            label="Kategorija"
+            onChange={handleChange}
+            value={values.category}
               // error={touched. && Boolean(errors.)}
-              fullWidth
-              variant="outlined"
-              size="small"
-            >
-              {props.category.map((option, index) => (
-                <MenuItem key={option.id} value={option.id} disabled={index === 0}>
-                  {option.title}
-                </MenuItem>
-              ))}
-            </TextField>
-          </Grid>
+            fullWidth
+            variant="outlined"
+            size="small"
+          >
+            {props.category.map((option, index) => (
+              <MenuItem key={option.id} value={option.id} disabled={index === 0}>
+                {option.title}
+              </MenuItem>
+            ))}
+          </TextField>
+        </Grid>
 
-          <Grid item xs={12}>
-            <TextField
-              select
-              name="brand"
-              label="Gamintojas"
-              onChange={handleChange}
-              value={values.brand}
+        <Grid item xs={12}>
+          <TextField
+            select
+            name="brand"
+            label="Gamintojas"
+            onChange={handleChange}
+            value={values.brand}
               // error={touched. && Boolean(errors.)}
-              fullWidth
-              variant="outlined"
-              size="small"
-            >
-              {props.brand.map((option) => (
-                <MenuItem key={option.id} value={option.id}>
-                  {option.title}
-                </MenuItem>
-              ))}
-            </TextField>
-          </Grid>
+            fullWidth
+            variant="outlined"
+            size="small"
+          >
+            {props.brand.map((option) => (
+              <MenuItem key={option.id} value={option.id}>
+                {option.title}
+              </MenuItem>
+            ))}
+          </TextField>
+        </Grid>
 
-          <Grid item xs={12}>
-            <TextField
-              name="name"
-              label="Pavadinimas"
-              onChange={handleChange}
-              value={values.name}
+        <Grid item xs={12}>
+          <TextField
+            name="name"
+            label="Pavadinimas"
+            onChange={handleChange}
+            value={values.name}
               // error={touched.name && Boolean(errors.name)}
-              fullWidth
-              variant="outlined"
-              size="small"
-            />
-          </Grid>
+            fullWidth
+            variant="outlined"
+            size="small"
+          />
+        </Grid>
 
-          <Grid item xs={12}>
-            <TextField
-              name="price"
-              label="Produkto vertė"
-              type="number"
-              onChange={handleChange}
-              value={values.price}
+        <Grid item xs={12}>
+          <TextField
+            name="price"
+            label="Produkto vertė"
+            type="number"
+            onChange={handleChange}
+            value={values.price}
               // error={touched.price && Boolean(errors.price)}
-              fullWidth
-              variant="outlined"
-              size="small"
-            />
-          </Grid>
+            fullWidth
+            variant="outlined"
+            size="small"
+          />
+        </Grid>
 
-          <Grid item xs={12}>
-            <TextField
-              select
-              name="size"
-              label="Dydis"
-              onChange={handleChange}
-              value={values.size}
+        <Grid item xs={12}>
+          <TextField
+            select
+            name="size"
+            label="Dydis"
+            onChange={handleChange}
+            value={values.size}
             // error={touched.surname && Boolean(errors.surname)}
-              fullWidth
-              variant="outlined"
-              size="small"
-            >
-              {props.size.map((option) => (
-                <MenuItem key={option.id} value={option.id}>
-                  {option.title}
-                </MenuItem>
-              ))}
-            </TextField>
-          </Grid>
+            fullWidth
+            variant="outlined"
+            size="small"
+          >
+            {props.size.map((option) => (
+              <MenuItem key={option.id} value={option.id}>
+                {option.title}
+              </MenuItem>
+            ))}
+          </TextField>
+        </Grid>
 
-          <Grid item xs={12}>
-            <TextField
-              select
-              name="color"
-              label="Spalva"
-              onChange={handleChange}
-              value={values.color}
+        <Grid item xs={12}>
+          <TextField
+            select
+            name="color"
+            label="Spalva"
+            onChange={handleChange}
+            value={values.color}
               // error={touched. && Boolean(errors.)}
-              fullWidth
-              variant="outlined"
-              size="small"
-            >
-              {props.color.map((option) => (
-                <MenuItem key={option.id} value={option.id}>
-                  {option.title}
-                </MenuItem>
-              ))}
-            </TextField>
-          </Grid>
+            fullWidth
+            variant="outlined"
+            size="small"
+          >
+            {props.color.map((option) => (
+              <MenuItem key={option.id} value={option.id}>
+                {option.title}
+              </MenuItem>
+            ))}
+          </TextField>
+        </Grid>
 
-          <Grid item xs={6}>
-            <Button
-              variant="outlined"
-              sx={{ px: 3 }}
-              onClick={img.length < 4 ? handleUploadFiles : handleError}
-            >
-              Įkelti nuotraukas
-            </Button>
-            <input
-              type="file"
-              hidden
-              ref={fileUploadRef}
-              accept=".jpg, .jpeg, .png"
-              onChange={handleImagesLoaded}
-            />
+        <Grid item xs={6}>
+          <Button
+            variant="outlined"
+            sx={{ px: 3 }}
+            onClick={img.length < 4 ? handleUploadFiles : handleError}
+          >
+            Įkelti nuotraukas
+          </Button>
+          <input
+            type="file"
+            hidden
+            ref={fileUploadRef}
+            accept=".jpg, .jpeg, .png"
+            onChange={handleImagesLoaded}
+          />
 
-          </Grid>
+        </Grid>
 
-          <Grid item xs={6}>
-            <Typography>Nuotraukos</Typography>
-            <Box>
-              {
+        <Grid item xs={6}>
+          <Typography>Nuotraukos</Typography>
+          <Box>
+            {
       img.map(({ id, src }) => (
         <Box
           key={id}
@@ -282,25 +281,24 @@ const AdminDashboard = () => {
         </Box>
       ))
     }
-            </Box>
-          </Grid>
-
+          </Box>
         </Grid>
 
-        <Box sx={{
-          mt: 5, display: 'flex', justifyContent: 'center',
-        }}
+      </Grid>
+
+      <Box sx={{
+        mt: 5, display: 'flex', justifyContent: 'center',
+      }}
+      >
+        <Button
+          variant="outlined"
+          type="submit"
+          sx={{ px: 3 }}
         >
-          <Button
-            variant="outlined"
-            type="submit"
-            sx={{ px: 3 }}
-          >
-            Sukurti prekę
-          </Button>
-        </Box>
+          Sukurti prekę
+        </Button>
       </Box>
-    </Container>
+    </Box>
   );
 };
 

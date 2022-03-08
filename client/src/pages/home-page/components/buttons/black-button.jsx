@@ -9,10 +9,11 @@ const StyledButton = styled(Button)(({ theme }) => ({
   color: theme.palette.primary.light,
   backgroundColor: theme.palette.primary.contrastText,
   borderColor: theme.palette.primary.contrastText,
+  borderRadius: 0,
   fontWeight: 700,
   '&:hover': {
-    borderColor: theme.palette.coloredButton.main,
-    backgroundColor: theme.palette.coloredButton.main,
+    borderColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.secondary.main,
     color: theme.palette.primary.contrastText,
   },
 }));

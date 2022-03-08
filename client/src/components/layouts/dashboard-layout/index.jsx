@@ -62,11 +62,7 @@ const DashboardLayout = () => {
         </IconButton>
         )}
       </Box>
-      <Box sx={(theme) => ({ width: '100%', height: theme.mixins.footer.height })} />
-      <Box sx={{
-        position: 'absolute', zIndex: 10000, bottom: 0, right: 0, width: '100%',
-      }}
-      >
+      <Box>
         <Footer />
       </Box>
     </Box>

@@ -109,7 +109,7 @@ export const lightTheme = createTheme(theme, {
       height: 150,
     },
     drawer: {
-      width: 240,
+      width: 270,
     },
     transitions: {
       duration: {
