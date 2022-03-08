@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Box, Typography, Container, Grid,
+  Box, Typography,
 } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { userSelector } from '../../../store/auth';
@@ -10,24 +10,13 @@ const ProfilePage = () => {
   const user = useSelector(userSelector);
 
   return (
-    <Container
-      maxWidth="lg"
-      sx={(theme) => ({ pt: `${theme.mixins.toolbar.height}px` })}
+    <Box
+      sx={(theme) => ({ mt: 2, mx: 4, height: `calc(100vh - ${theme.mixins.footer.height * 2}px )` })}
+      maxWidth="sm"
     >
-      <Box sx={() => ({ py: 2 })}>
-        <Typography variant="h4">Profilis</Typography>
-      </Box>
-      <Grid
-        container
-        spacing={2}
-      >
-        <Grid item xs={12} md={10} sx={{ display: 'flex', flexWrap: 'wrap' }}>
-          <Grid item xs={12} md={8} sx={{ my: 5 }}>
-            <ProfilePageUserInfo user={user} />
-          </Grid>
-        </Grid>
-      </Grid>
-    </Container>
+      <Typography variant="h4" sx={{ mb: 5 }}>Informacija</Typography>
+      <ProfilePageUserInfo user={user} />
+    </Box>
   );
 };
 

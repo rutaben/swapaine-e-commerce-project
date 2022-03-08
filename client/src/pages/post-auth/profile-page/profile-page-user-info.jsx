@@ -12,7 +12,7 @@ import ErrorIcon from '@mui/icons-material/Error';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import AuthService from '../../../services/auth-service';
 import ProfileService from '../../../services/profile-service';
-import BlackButton from '../../home-page/components/buttons/black-button';
+import ContainedButtonDark from '../../../components/buttons/contained-button-dark';
 
 const validationSchema = yup.object({
   name: yup.string()
@@ -46,8 +46,6 @@ const ProfilePageUserInfo = ({ user }) => {
     emailChecked: true,
     emailAvailable: true,
   }), [user]);
-
-  console.log(initialValues);
 
   const onSubmit = async (values) => {
     const body = Object.entries(values)
@@ -128,13 +126,11 @@ const ProfilePageUserInfo = ({ user }) => {
       onSubmit={handleSubmit}
       sx={{
         display: 'flex',
-        gap: 3,
-        px: 3,
         flexDirection: 'column',
       }}
     >
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12}>
           <TextField
             name="name"
             label="Vardas"
@@ -149,7 +145,7 @@ const ProfilePageUserInfo = ({ user }) => {
           />
         </Grid>
 
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12}>
           <TextField
             name="surname"
             label="Pavardė"
@@ -188,10 +184,10 @@ const ProfilePageUserInfo = ({ user }) => {
 
       </Grid>
       <Box sx={{
-        mt: 3, display: 'flex', justifyContent: 'center', width: '50%',
+        mt: 3,
       }}
       >
-        <BlackButton variant="outlined" title="Išsaugoti" disabled={!dirty || !isValid} />
+        <ContainedButtonDark variant="outlined" title="Išsaugoti" disabled={!dirty || !isValid} />
       </Box>
     </Box>
   );

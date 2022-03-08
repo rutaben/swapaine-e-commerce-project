@@ -48,8 +48,6 @@ const DashboardLayoutDrawer = ({
         '& .MuiDrawer-paper': {
           width: theme.mixins.drawer.width,
           boxSizing: 'border-box',
-          // backgroundColor: 'rgba(0, 0, 0, 0.0)',
-          // borderWidth: 0,
         },
       }}
       variant={isSmallScreen ? 'persistent' : 'permanent'}
