@@ -66,7 +66,7 @@ const PlanCard = ({
           /mėn.
         </StyledBody>
       </Box>
-      <StyledNavlink to="/checkout">
+      <StyledNavlink to="/login">
         <ContainedButtonDark title="Išbandyti" />
       </StyledNavlink>
       <StyledBody variant="body2" sx={{ mt: 2 }}>

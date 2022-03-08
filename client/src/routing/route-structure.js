@@ -13,7 +13,6 @@ const routeStructure = [
       { index: true, pageName: 'Homepage' },
       { path: 'products', pageName: 'ProductsPage' },
       { path: 'products/:id', pageName: 'ProductPage' },
-      { path: 'checkout', pageName: 'CheckoutPage' },
       {
         path: '/',
         pageName: 'ViewportLayout',
