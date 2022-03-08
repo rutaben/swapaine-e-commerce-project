@@ -6,11 +6,7 @@ import {
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import ParkSharpIcon from '@mui/icons-material/ParkSharp';
 import VerifiedIcon from '@mui/icons-material/Verified';
-// import EcoImage from '../../assets/images/icon-eco.png';
-// import PackageImage from '../../assets/images/icon-package.png';
-// import CancellationImage from '../../assets/images/icon-cancellation.png';
 import FeatureCard from './components/cards/feature-card';
-import ContainedButtonDark from '../../components/buttons/contained-button-dark';
 
 const featuresCardsData = [
   { title: 'Draugiška aplinkai', body: 'Nesirūpinkite drabužių skalbimu - juos valome ekologiškoje valykloje.', icon: <ParkSharpIcon fontSize="large" /> },
@@ -26,8 +22,7 @@ const Features = () => (
       justifyContent: 'center',
       alignItems: 'center',
       px: 15,
-      mb: 10,
-      mt: 2,
+      my: 5,
       [theme.breakpoints.down('lg')]: {
         px: 5,
       },
@@ -49,9 +44,6 @@ const Features = () => (
         </FeatureCard>
       </Grid>
     ))}
-    <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center', gap: 3 }}>
-      <ContainedButtonDark title="Žiūrėti planus" />
-    </Grid>
   </Grid>
 );
 

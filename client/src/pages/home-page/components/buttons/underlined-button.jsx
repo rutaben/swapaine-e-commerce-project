@@ -3,7 +3,14 @@ import {
   Button,
   styled,
 } from '@mui/material';
+import { Link } from 'react-router-dom';
+import routes from '../../../../routing/routes';
 import ButtonTypography from '../../../../components/buttons/button-typography';
+
+const StyledLink = styled(Link)(({ theme }) => ({
+  textDecoration: 'none',
+  color: theme.palette.primary.main,
+}));
 
 const StyledButton = styled(Button)(({ theme }) => ({
   padding: 0,
@@ -16,11 +23,13 @@ const StyledButton = styled(Button)(({ theme }) => ({
 }));
 
 const UnderlinedButton = ({ title }) => (
-  <StyledButton size="large">
-    <ButtonTypography variant="body2">
-      {title}
-    </ButtonTypography>
-  </StyledButton>
+  <StyledLink to={routes.ProductsPage}>
+    <StyledButton size="large">
+      <ButtonTypography variant="body2">
+        {title}
+      </ButtonTypography>
+    </StyledButton>
+  </StyledLink>
 );
 
 export default UnderlinedButton;

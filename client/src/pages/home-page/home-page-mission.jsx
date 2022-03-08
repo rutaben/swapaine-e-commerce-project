@@ -21,7 +21,7 @@ const StyledTextbox = styled(Box)(() => ({
 
 const Mission = () => (
   <Container
-    maxWidth="lg"
+    maxWidth="md"
     sx={(theme) => ({
       [theme.breakpoints.down('md')]: {
         mt: 10,

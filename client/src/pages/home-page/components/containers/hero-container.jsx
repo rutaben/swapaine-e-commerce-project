@@ -5,6 +5,8 @@ import {
   Paper,
   styled,
 } from '@mui/material';
+import { Link } from 'react-router-dom';
+import routes from '../../../../routing/routes';
 import ContainedButton from '../buttons/contained-button';
 import ScrollIconAnimation from '../animations/scroll-icon-animation';
 
@@ -18,6 +20,11 @@ const StyledHeader = styled(Typography)(({ theme }) => ({
   fontWeight: 700,
   textTransform: 'uppercase',
   fontFamily: 'Cormorant Garamond',
+}));
+
+const StyledLink = styled(Link)(({ theme }) => ({
+  textDecoration: 'none',
+  color: theme.palette.primary.main,
 }));
 
 const HeroContainer = ({ heroText, title, children }) => (
@@ -42,7 +49,9 @@ const HeroContainer = ({ heroText, title, children }) => (
       >
         {heroText}
       </StyledHeader>
-      <ContainedButton title={title} />
+      <StyledLink to={routes.ProductsPage}>
+        <ContainedButton title={title} />
+      </StyledLink>
     </StyledBox>
     <Box
       sx={{
