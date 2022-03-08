@@ -39,7 +39,7 @@ const HeroContainer = ({ heroText, title, children }) => (
         width: '100%',
         flexDirection: 'column',
         position: 'absolute',
-        top: '400px',
+        top: '45vh',
       }}
     >
       <StyledHeader
