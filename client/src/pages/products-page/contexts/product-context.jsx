@@ -25,6 +25,8 @@ const ProductProvider = ({ children }) => {
   const [pagesCount, setPagesCount] = useState(1);
   const [currPage, setCurrPage] = useState(1);
 
+  console.log(filters);
+
   // filters
 
   const filtersArrToObj = ([
@@ -44,6 +46,8 @@ const ProductProvider = ({ children }) => {
         ApiService.getColors(),
         ApiService.getSizes(),
       ]);
+      console.log(fetchedFilters);
+
       try {
         const initFiltersValues = fetchedFilters.map((filter) => Object.values(filter)).flat();
         const filtersObj = filtersArrToObj(initFiltersValues);
@@ -78,6 +82,7 @@ const ProductProvider = ({ children }) => {
               });
             }),
           }));
+        console.log(filtersOptionsIdsFromUrl);
 
         const syncedFiltersValues = setSelectedOptionsFromUrl
           .map((filter) => Object.values(filter))

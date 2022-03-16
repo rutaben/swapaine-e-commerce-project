@@ -14,7 +14,6 @@ import {
 // import ProductService from '../../../services/product-service';
 import ApiService from '../../../services/api-service';
 import ProductImageService from '../../../services/image-service';
-import ContainedButtonDark from '../../../components/buttons/contained-button-dark';
 
 const defaultOption = {
   id: '-1',
@@ -41,6 +40,7 @@ const initialProps = {
 const AdminDashboard = () => {
   const [props, setProps] = useState(initialProps);
   const [imgArr, setImgArr] = useState(initialValues.productImages);
+  console.log(imgArr);
 
   const fileUploadRef = useRef(null);
 
@@ -55,6 +55,7 @@ const AdminDashboard = () => {
   const handleImagesLoaded = async () => {
     const input = fileUploadRef.current;
     const data = await ProductImageService.uploadImages(input.files[0]);
+    console.log(input);
     addToImgArr(data);
   };
 
@@ -226,12 +227,13 @@ const AdminDashboard = () => {
         </Grid>
 
         <Grid item xs={12}>
-          <ContainedButtonDark
-            title="Įkelti nuotrauką"
+          <Button
             variant="outlined"
             sx={{ px: 3 }}
             onClick={imgArr.length < 4 ? handleUploadFiles : handleError}
-          />
+          >
+            Įkelti nuotrauką
+          </Button>
           <input
             type="file"
             hidden
