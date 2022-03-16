@@ -14,7 +14,6 @@ import {
 // import ProductService from '../../../services/product-service';
 import ApiService from '../../../services/api-service';
 import ProductImageService from '../../../services/image-service';
-// import ContainedButtonDark from '../../../components/buttons/contained-button-dark';
 
 const defaultOption = {
   id: '-1',
