@@ -22,7 +22,7 @@ const updateUser = async (req, res) => {
   const userDoc = await UserModel.findOneAndUpdate(
     { email: req.user.email },
     props,
-    { new: false }
+    { new: true }
   )
 
   res.status(200).json({
