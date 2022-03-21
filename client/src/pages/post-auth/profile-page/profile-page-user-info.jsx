@@ -6,13 +6,14 @@ import {
   TextField,
   InputAdornment,
   CircularProgress,
+  Button,
 } from '@mui/material';
 import * as yup from 'yup';
 import ErrorIcon from '@mui/icons-material/Error';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import AuthService from '../../../services/auth-service';
 import ProfileService from '../../../services/profile-service';
-import ContainedButtonDark from '../../../components/buttons/contained-button-dark';
+// import ContainedButtonDark from '../../../components/buttons/contained-button-dark';
 
 const validationSchema = yup.object({
   name: yup.string()
@@ -47,16 +48,9 @@ const ProfilePageUserInfo = ({ user }) => {
     emailAvailable: true,
   }), [user]);
 
-  const onSubmit = async (values) => {
-    const body = Object.entries(values)
-      .reduce((oldResult, [name, value]) => {
-        const newResult = { ...oldResult };
-        if (value !== initialValues[name]) {
-          newResult[name] = value;
-        }
-        return newResult;
-      }, {});
-    await ProfileService.updateUserData(body);
+  const onSubmit = async ({ name, surname, email }) => {
+    await ProfileService.updateUserData({ name, surname, email });
+    alert('Duomenys atnaujinti');
   };
 
   const {
@@ -183,12 +177,10 @@ const ProfilePageUserInfo = ({ user }) => {
         </Grid>
 
       </Grid>
-      <Box sx={{
-        mt: 3,
-      }}
-      >
-        <ContainedButtonDark variant="outlined" title="Išsaugoti" disabled={!dirty || !isValid} />
-      </Box>
+
+      <Button type="submit" variant="outlined" disabled={!dirty || !isValid} sx={{ mt: 3 }}>
+        {isSubmitting ? <CircularProgress size={24} /> : 'Išsaugoti'}
+      </Button>
     </Box>
   );
 };
