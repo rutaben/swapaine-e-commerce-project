@@ -11,9 +11,9 @@ import {
 import * as yup from 'yup';
 import ErrorIcon from '@mui/icons-material/Error';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import swal from 'sweetalert';
 import AuthService from '../../../services/auth-service';
 import ProfileService from '../../../services/profile-service';
-// import ContainedButtonDark from '../../../components/buttons/contained-button-dark';
 
 const validationSchema = yup.object({
   name: yup.string()
@@ -41,16 +41,22 @@ const ProfilePageUserInfo = ({ user }) => {
   const [emailCheckLoading, setEmailCheckLoading] = useState(false);
 
   const initialValues = useMemo(() => ({
-    name: user.name,
-    surname: user.surname,
-    email: user.email,
+    name: user ? user.name : '',
+    surname: user ? user.surname : '',
+    email: user ? user.email : '',
     emailChecked: true,
     emailAvailable: true,
   }), [user]);
 
   const onSubmit = async ({ name, surname, email }) => {
     await ProfileService.updateUserData({ name, surname, email });
-    alert('Duomenys atnaujinti');
+    swal({
+      title: 'Duomenys atnaujinti',
+      icon: 'success',
+      button: {
+        text: 'Uždaryti',
+      },
+    });
   };
 
   const {
