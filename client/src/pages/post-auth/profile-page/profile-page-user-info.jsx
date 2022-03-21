@@ -48,8 +48,8 @@ const ProfilePageUserInfo = ({ user }) => {
     emailAvailable: true,
   }), [user]);
 
-  const onSubmit = async ({ name, surname, email }) => {
-    await ProfileService.updateUserData({ name, surname, email });
+  const onSubmit = async (body) => {
+    await ProfileService.updateUserData(body);
     swal({
       title: 'Duomenys atnaujinti',
       icon: 'success',

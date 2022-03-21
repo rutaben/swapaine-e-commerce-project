@@ -28,7 +28,6 @@ const ProfileService = new (class ProfileService {
       },
     });
     store.dispatch(updateUser({ user: data.user }));
-    console.log(data);
   }
 })();
 
