@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useFormik } from 'formik';
 import DeleteIcon from '@mui/icons-material/Delete';
+import swal from 'sweetalert';
 
 import {
   Typography,
@@ -59,7 +60,12 @@ const AdminDashboard = () => {
     addToImgArr(data);
   };
 
-  const handleError = () => alert('Pasiekėte didžiausią leistiną nuotraukų kiekį.');
+  const handleError = () => swal({
+    title: 'Klaida',
+    text: 'Pasiekėte didžiausią leistiną nuotraukų kiekį',
+    icon: 'error',
+    button: 'Uždaryti',
+  });
 
   const handleImageDelete = async (id) => {
     await ProductImageService.deleteImage(id);
