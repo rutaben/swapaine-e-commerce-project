@@ -9,10 +9,11 @@ const {
 } = require('../controllers/product-controller');
 
 const router = express.Router();
+const upload = require('multer')();
 
 router.get('/', getProducts);
 
-router.post('/', createProduct);
+router.post('/', upload.any(), createProduct);
 
 router.get('/:id', getProduct);
 
