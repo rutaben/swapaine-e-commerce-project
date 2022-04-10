@@ -12,7 +12,7 @@ import {
   MenuItem,
   IconButton,
 } from '@mui/material';
-// import ProductService from '../../../services/product-service';
+import ProductService from '../../../services/product-service';
 import ApiService from '../../../services/api-service';
 import ProductImageService from '../../../services/image-service';
 
@@ -41,7 +41,6 @@ const initialProps = {
 const AdminDashboard = () => {
   const [props, setProps] = useState(initialProps);
   const [imgArr, setImgArr] = useState(initialValues.productImages);
-  console.log(imgArr);
 
   const fileUploadRef = useRef(null);
 
@@ -56,7 +55,6 @@ const AdminDashboard = () => {
   const handleImagesLoaded = async () => {
     const input = fileUploadRef.current;
     const data = await ProductImageService.uploadImages(input.files[0]);
-    console.log(input);
     addToImgArr(data);
   };
 
@@ -72,20 +70,18 @@ const AdminDashboard = () => {
     setImgArr(imgArr.filter((x) => x.id !== id));
   };
 
-  // const throwAlert = () => alert('Produktas sukurtas');
-
-  // const createNewProduct = async (formattedData) => {
-  //   const data = await ProductService.createProduct(formattedData);
-  //   throwAlert();
-  // };
-
-  const onSubmit = (values) => {
+  const onSubmit = async (values) => {
+    const imgIdsArr = imgArr.map((img) => img.id);
     const formattedData = {
       ...values,
-      productImages: [...imgArr],
+      productImages: imgIdsArr,
     };
-    console.log('Suformuoti user duomenys', formattedData);
-    // createNewProduct(formattedData);
+    await ProductService.createProduct(formattedData);
+    swal({
+      title: 'Produktas sėkmingai sukurtas',
+      icon: 'success',
+      button: 'Uždaryti',
+    });
   };
 
   const filtersArrToObj = ([

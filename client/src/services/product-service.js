@@ -19,33 +19,31 @@ const ProductService = new (class ProductService {
   }
 
   async createProduct(formattedData) {
-    // console.log('Duomenu objektas', formattedData);
-    const token = ProductService.validateToken();
-    // brand: "6202b15d87dac037fdce5ff0"
-    // category: "6202ca772ee32bcfba828e5f"
-    // color: "6202b94de25b46a27b809d02"
-    // name: "Ruta"
-    // price: 7
-    // productImages: (4)[{… }, {… }, {… }, {… }]
-    // size: "6202bcf6a34e4e38fd0008c7"
+    try {
+      const token = ProductService.validateToken();
 
-    const body = new FormData();
+      const formData = new FormData();
 
-    Object.entries(formattedData).forEach(([name, data]) => {
-      if (data instanceof Array) {
-        body.append(name, data);
-      } else {
-        body.append(name, data);
-      }
-    });
+      const formattedDataArr = Object.entries(formattedData);
+      formattedDataArr.forEach(([name, data]) => {
+        if (data instanceof Array) {
+          data.forEach((y) => {
+            formData.append(name, y);
+          });
+        } else {
+          formData.append(name, data);
+        }
+      });
 
-    const { data } = await this.requester.post('/products', body, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    return data;
+      const { data } = await this.requester.post('/products', formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
 })();
 

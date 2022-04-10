@@ -25,8 +25,6 @@ const ProductProvider = ({ children }) => {
   const [pagesCount, setPagesCount] = useState(1);
   const [currPage, setCurrPage] = useState(1);
 
-  console.log(filters);
-
   // filters
 
   const filtersArrToObj = ([
