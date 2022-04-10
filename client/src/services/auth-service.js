@@ -15,7 +15,7 @@ const AuthService = new (class AuthService {
       },
     });
     if (token) {
-      // this.requester.defaults.headers.common.Authorization = `Bearer ${token}`;
+      this.requester.defaults.headers.common.Authorization = `Bearer ${token}`;
       this.authenticate(token);
     } else {
       reduxStore.dispatch(authFailed());
