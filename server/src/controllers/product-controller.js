@@ -1,5 +1,6 @@
 const ProductModel = require('../models/product-model');
 const ProductViewModel = require('../view-models/product-view-model');
+const upload = require('multer')();
 
 const getProducts = async (req, res) => {
   const {
@@ -25,7 +26,7 @@ const getProducts = async (req, res) => {
     filterObject.color = { $in: [].concat(color) };
   }
 
-  const ProductDocs = await ProductModel
+  const productDocs = await ProductModel
     .find(filterObject)
     .populate('category')
     .populate('brand')
@@ -35,7 +36,7 @@ const getProducts = async (req, res) => {
     .limit(limit * 1)
     .skip((page - 1) * limit)
 
-  const Products = ProductDocs.map(Product => new ProductViewModel(Product));
+  const products = productDocs.map(product => new ProductViewModel(product));
 
   const allProducts = await ProductModel
     .find(filterObject)
@@ -45,18 +46,18 @@ const getProducts = async (req, res) => {
     .populate('color')
     .populate('productImages')
   const allProductsCount = allProducts.map((product) => new ProductViewModel(product)).length;
-  console.log(allProductsCount);
 
   res.status(200).json({
-    data: Products,
+    data: products,
     totalPages: Math.ceil(allProductsCount / limit),
     currentPage: page,
   });
 };
 
 const createProduct = async (req, res) => {
+  console.log(req.body);
   const { name, price, category, size, color, brand, productImages } = req.body;
-  const ProductDoc = await ProductModel({
+  const productDoc = await ProductModel({
     name,
     price,
     category,
@@ -67,9 +68,9 @@ const createProduct = async (req, res) => {
   });
 
   try {
-    await ProductDoc.save();
-    const Product = new ProductViewModel(ProductDoc);
-    res.status(201).json(Product);
+    await productDoc.save();
+    const product = new ProductViewModel(productDoc);
+    res.status(201).json(product);
   } catch (error) {
     res.status(400).json({
       message: `Klaida: jau yra toks produktas`,
@@ -80,15 +81,15 @@ const createProduct = async (req, res) => {
 const getProduct = async (req, res) => {
   const { id } = req.params;
   try {
-    const ProductDoc = await ProductModel
+    const productDoc = await ProductModel
       .findById(id)
       .populate('brand')
       .populate('category')
       .populate('color')
       .populate('size')
       .populate('productImages')
-    const Product = new ProductViewModel(ProductDoc);
-    res.status(200).json(Product);
+    const product = new ProductViewModel(productDoc);
+    res.status(200).json(product);
   } catch (error) {
     res.status(404).json({
       message: `Elementas nerastas su id: '${id}'`,
@@ -99,9 +100,9 @@ const getProduct = async (req, res) => {
 const deleteProduct = async (req, res) => {
   const { id } = req.params;
   try {
-    const ProductDoc = await ProductModel.findByIdAndDelete(id);
-    const Product = new ProductViewModel(ProductDoc);
-    res.status(200).json(Product);
+    const productDoc = await ProductModel.findByIdAndDelete(id);
+    const product = new ProductViewModel(productDoc);
+    res.status(200).json(product);
   }
   catch (error) {
     console.log(error.message)
@@ -123,7 +124,7 @@ const updateProduct = async (req, res) => {
     await ProductModel.findById(id);
 
     try {
-      const ProductDoc = await ProductModel.findByIdAndUpdate(
+      const productDoc = await ProductModel.findByIdAndUpdate(
         id,
         {
           name,
@@ -135,8 +136,8 @@ const updateProduct = async (req, res) => {
         },
         { new: true }
       );
-      const Product = new ProductViewModel(ProductDoc);
-      res.status(200).json(Product);
+      const product = new ProductViewModel(productDoc);
+      res.status(200).json(product);
     } catch (error) {
       res.status(400).json({ message: 'Blogi parametrai' });
     }
@@ -153,7 +154,7 @@ const replaceProduct = async (req, res) => {
     await ProductModel.findById(id);
 
     try {
-      const ProductDoc = await ProductModel.findOneAndReplace(
+      const productDoc = await ProductModel.findOneAndReplace(
         id,
         {
           name,
@@ -165,8 +166,8 @@ const replaceProduct = async (req, res) => {
         },
         { new: true }
       );
-      const Product = new ProductViewModel(ProductDoc);
-      res.status(200).json(Product);
+      const product = new ProductViewModel(productDoc);
+      res.status(200).json(product);
     } catch (error) {
       res.status(400).json({ message: 'Blogi parametrai' });
     }
