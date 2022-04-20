@@ -1,13 +1,14 @@
-# Swapaine
+# swapaine (development in progress)
 
-An e-commerce (subscribtion) service web application (React & Node.js).
+E-commerce (subscription) service web application. Built with JavaScript (ReactJS) & Node.js(Express). The client side will be rewritten in TypeScript after the first project version is completed.
 
 ## Description
 
 * Responsive design using Material-UI library.
-* Basic e-shop functionality: filtering, pagination.
+* Basic e-shop functionality: filtering and pagination (both in client and server side).
 * Authentication and user/ admin roles.
-* CRUD operations using forms (Formik library).
+* CRUD operations using forms (Formik library). 
+(So far, user can create an account or change personal information and admin can change personal information and create a new product.)
 * Schema-based form-level validation (Yup).
 
 # Getting Started
