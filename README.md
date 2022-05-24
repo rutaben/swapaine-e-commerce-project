@@ -1,4 +1,4 @@
-# swapaine (development in progress)
+# swapaine (development on pause)
 
 E-commerce (subscription based) sustainable clothes rental service web application. Built with JavaScript (ReactJS) & Node.js (Express). The client side will be rewritten in TypeScript after the first project version is completed.
 
