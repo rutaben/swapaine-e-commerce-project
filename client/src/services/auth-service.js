@@ -3,7 +3,6 @@ import SessionService from './session-service';
 import reduxStore from '../store/index';
 import { login, logout, authFailed } from '../store/auth';
 
-// Singleton pattern + klase i karto iskviesti;
 const AuthService = new (class AuthService {
   constructor() {
     const token = SessionService.get('auth_token ');
@@ -31,8 +30,6 @@ const AuthService = new (class AuthService {
     return this.token;
   }
 
-  // po login, iskart nustatom useriui token, ir grazinam useri.
-  // Login page dabar negausim token, o iskart user.
   async login({ email, password }) {
     try {
       const { data: { user, token } } = await this.requester.post('/login', { email, password });
@@ -82,9 +79,5 @@ const AuthService = new (class AuthService {
     }
   }
 })();
-
-// const deleteAuth = () => {
-//   delete requester.defaults.headers.common.Authorization;
-// };
 
 export default AuthService;

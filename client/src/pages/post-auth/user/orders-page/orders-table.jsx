@@ -26,14 +26,6 @@ const rows = [
 const FavoritesTable = () => (
   <Box sx={{ mt: 5 }}>
     <ProductTableContainer title="Užsakymai">
-      {/* <TableHead>
-        <TableRow>
-          <TableCell>Pasirinkti</TableCell>
-          <TableCell />
-          <TableCell />
-          <TableCell align="right">Ištrinti</TableCell>
-        </TableRow>
-      </TableHead> */}
       <TableBody>
         {rows.map((row) => (
           <TableRow

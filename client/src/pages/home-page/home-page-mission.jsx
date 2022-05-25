@@ -73,9 +73,6 @@ const Mission = () => (
             spintą aukštos kokybės rūbais jums tik panorėjus, o vėliau - leisti jais džiaugtis
             ir kitiems.
           </Typography>
-          {/* <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-            <UnderlinedButton title="Kaip tai veikia" />
-          </Box> */}
         </StyledTextbox>
       </Grid>
     </Grid>
