@@ -1,4 +1,5 @@
 const relativePaths = require('./relative-paths');
+// nepamirsk susitrumpinti likusius kelius
 
 module.exports = {
   env: {
