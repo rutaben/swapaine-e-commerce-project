@@ -8,7 +8,6 @@ const {
 
 const router = express.Router();
 
-//* middlewares
 router.use(authMiddleware);
 
 router.get('/', adminMiddleWare, getUsers);

@@ -11,16 +11,12 @@ const router = express.Router();
 router.use(authConfigureMiddleware);
 
 
-// POST - /api/auth
 router.post('/', auth);
 
-//POST - /api/auth/register
 router.post('/register', register);
 
-//POST - /api/auth/login
 router.post('/login', login);
 
-//GET - /api/auth/check-email
 router.get('/check-email', checkEmail);
 
 module.exports = router;
